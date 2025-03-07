@@ -11,7 +11,7 @@ BarberConnect é um aplicativo inovador que simplifica o agendamento de cortes d
 ## Integrantes
 
 * Frederico Arleo Rezende Zampier
-* Nome completo do aluno 2
+* Mailson Da Silva Costa
 * Nome completo do aluno 3
 * Nome completo do aluno 4
 
