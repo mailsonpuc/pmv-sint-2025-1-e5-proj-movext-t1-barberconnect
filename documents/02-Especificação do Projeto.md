@@ -67,7 +67,7 @@ Enumere as restrições à sua solução. Lembre-se de que as restrições geral
 
 ## Diagrama de Casos de Uso
 
-<img src="img/sistema_barbearia.svg" width="700px">
+<img src="img/SistemaV2.svg" width="700px">
 
 
 ## Modelo ER (Projeto Conceitual)
