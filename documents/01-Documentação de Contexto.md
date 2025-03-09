@@ -1,18 +1,25 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+Com a crescente digitalização dos serviços, a busca por soluções tecnológicas que melhorem a experiência do cliente e otimizem a gestão de negócios tem se tornado essencial. O presente projeto visa desenvolver um aplicativo móvel para barbearias, proporcionando praticidade tanto para os clientes quanto para os barbeiros.
+
+O aplicativo permitirá que os usuários agendem horários com facilidade, escolham seus barbeiros preferidos, acompanhem promoções e recebam notificações sobre seus agendamentos. Já para os profissionais, a plataforma oferecerá um painel de controle intuitivo para gerenciar horários, fidelizar clientes e otimizar o atendimento.
+
+Com um design moderno e uma navegação intuitiva, a aplicação busca melhorar a experiência do usuário, reduzir filas e fortalecer a relação entre clientes e barbeiros.
 
 ## Problema
 A aplicação se propõe a aumentar a clientela dos profissionais de barbearia, criando um ambiente para expor seu perfil e mostrar suas qualidades como profissional e possibilitando que pessoas que se interessarem marquem um horário de forma prática e ágil. Para os clientes, a plataforma oferece simplicidade para descobrir profissionais em sua área para realizarem os procedimentos desejados, sabendo os valores previamentes e evitando de ficar esperando para ser atendido
 
 ## Objetivos
-
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
-
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
  
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+
+Desenvolver um aplicativo móvel para barbearias que facilite o agendamento de serviços, otimize a gestão dos atendimentos e melhore a experiência tanto dos clientes quanto dos barbeiros, promovendo maior organização e fidelização.  
+
+### **Objetivos Específicos**  
+1. **Criar uma interface intuitiva e responsiva** que permita aos usuários agendarem horários, escolherem barbeiros e acompanharem seus atendimentos de forma prática e acessível.  
+2. **Implementar um sistema de gerenciamento para barbeiros**, incluindo controle de agenda, histórico de atendimentos e notificações para otimizar a organização dos serviços.  
+3. **Desenvolver um mecanismo de fidelização e marketing**, como notificações push, promoções e descontos personalizados, para aumentar o engajamento dos clientes.  
+4. **Garantir segurança e confiabilidade dos dados**, utilizando boas práticas de desenvolvimento para proteger informações sensíveis e proporcionar uma experiência segura.  
+
 
 ## Justificativa
 
@@ -22,6 +29,10 @@ A criação do BarberConnect justifica-se pela necessidade de modernizar e otimi
 
 Ao resolver problemas operacionais das barbearias, o BarberConnect promove um sistema sociotécnico equilibrado, onde eficiência empresarial e desenvolvimento social coexistem. A digitalização inclusiva estimula a formalização de negócios informais, gerando empregos dignos e contribuindo para uma economia mais justa e sustentável. Assim, o impacto vai além do setor de beleza, fortalecendo redes locais e promovendo equidade socioeconômica.
 
-## Descrição do Parceiro
+## Descrição do Parceiro 
 
-Apresente uma descrição resumida sobre a organização onde o projeto será desenvolvido para que possa ser compreendido o cenário sistema sociotécnico.
+O projeto será desenvolvido em parceria com a **[Nome da Barbearia]**, uma barbearia localizada em **[Cidade/Região]**, que busca modernizar seus serviços e oferecer uma experiência mais conveniente para seus clientes. Fundada em **[Ano de Fundação]**, a barbearia tem se destacado pelo atendimento personalizado e pela qualidade dos serviços prestados.  
+
+Atualmente, a gestão dos agendamentos e do relacionamento com os clientes é feita manualmente, o que pode gerar atrasos, confusões na agenda e dificuldades na comunicação. A implementação do aplicativo visa solucionar esses desafios, trazendo mais eficiência e praticidade tanto para os clientes quanto para os barbeiros.  
+
+O parceiro será fundamental no processo de desenvolvimento, contribuindo com feedbacks sobre as funcionalidades e necessidades reais do setor, garantindo que a solução proposta atenda plenamente às demandas da barbearia.  
