@@ -31,7 +31,7 @@ Ao resolver problemas operacionais das barbearias, o BarberConnect promove um si
 
 ## Descrição do Parceiro 
 
-O projeto será desenvolvido em parceria com a **[Nome da Barbearia]**, uma barbearia localizada em **[Cidade/Região]**, que busca modernizar seus serviços e oferecer uma experiência mais conveniente para seus clientes. Fundada em **[Ano de Fundação]**, a barbearia tem se destacado pelo atendimento personalizado e pela qualidade dos serviços prestados.  
+O projeto será desenvolvido em parceria com a Millennium Barbearia, uma barbearia localizada em São João del Rei-MG, que busca modernizar seus serviços e oferecer uma experiência mais conveniente para seus clientes. Fundada em 2023, a barbearia tem se destacado pelo atendimento personalizado e pela qualidade dos serviços prestados.  
 
 Atualmente, a gestão dos agendamentos e do relacionamento com os clientes é feita manualmente, o que pode gerar atrasos, confusões na agenda e dificuldades na comunicação. A implementação do aplicativo visa solucionar esses desafios, trazendo mais eficiência e praticidade tanto para os clientes quanto para os barbeiros.  
 
