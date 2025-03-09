@@ -25,15 +25,26 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID    | Descrição do Requisito  | Prioridade |
 |------|-----------------------------------------|----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | 
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|RF-001| Permitir que o cliente agende um horário online | ALTA | 
+|RF-002| Enviar lembretes automáticos de agendamentos   | ALTA | 
+|RF-003| Possibilitar que o cliente avalie o corte realizado | MÉDIA | 
+|RF-004| Exibir uma galeria de estilos com catálogo de cortes e barbas | ALTA | 
+|RF-005| Fornecer um link direto para o WhatsApp da barbearia | ALTA | 
+|RF-006| Integração ao Google Maps para exibir a localização da barbearia | MÉDIA | 
+|RF-007| Permitir que os barbeiros gerenciem seus horários de atendimento | ALTA | 
+|RF-008| Implementar sistema de confirmação automática de agendamentos | ALTA | 
+|RF-009| Oferecer um painel para os barbeiros visualizarem seus agendamentos diários | MÉDIA | 
+|RF-010| Notificar os barbeiros sobre novos agendamentos ou cancelamentos | ALTA | 
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|RNF-001| O sistema deve garantir a confirmação instantânea dos agendamentos | ALTA | 
+|RNF-002| A interface deve ser simples, intuitiva e visualmente atraente   | ALTA | 
+|RNF-003| Deve ser otimizado para dispositivos móveis (Android e iOS) | ALTA | 
+|RNF-004| Deve carregar a galeria de estilos rapidamente | MÉDIA | 
+|RNF-005| Suportar notificações push para lembretes de agendamento | ALTA | 
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
@@ -58,7 +69,7 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 |--|-------------------------------------------------------|
 |01| O projeto deverá ser entregue até o final do semestre |
 |02| Não pode ser desenvolvido um módulo de backend        |
-
+|03| A confirmação automática de agendamentos dependerá de conexão ativa |
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
 > **Links Úteis**:
