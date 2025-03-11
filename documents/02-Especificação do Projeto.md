@@ -14,8 +14,8 @@ A arquitetura será baseada no modelo Cliente-Servidor, sendo o servidor uma Web
 
 Colocar a imagem do modelo construído apresentando a proposta de solução.
 
-> **Links Úteis**:
-> Disponíveis em material de apoio do projeto
+<img src="img/pmCanvas.webp" width="700px">
+
 
 ## Requisitos
 
