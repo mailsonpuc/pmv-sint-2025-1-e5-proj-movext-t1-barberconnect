@@ -4,7 +4,7 @@
 
 `PROJETO DE DESENVOLVIMENTO MOBILE`
 
-`SEMESTRE`
+ `5º SEMESTRE`
 
 BarberConnect é um aplicativo inovador que simplifica o agendamento de cortes de cabelo, conectando clientes a barbearias e barbeiros de forma rápida e intuitiva. Com uma interface amigável, os usuários podem explorar perfis de profissionais, verificar disponibilidade em tempo real, escolher serviços específicos (como corte, barba ou coloração) e agendar horários com confirmação instantânea. Para os barbeiros, o app oferece ferramentas de gestão de agenda, lembretes automáticos para reduzir faltas e histórico de clientes. Além disso, recursos como avaliações, fotos de trabalhos anteriores e promoções personalizadas aumentam a visibilidade dos estabelecimentos. O BarberConnect busca otimizar a experiência tanto para quem quer um corte impecável quanto para profissionais que desejam eficiência e crescimento no mercado de beleza.
 
