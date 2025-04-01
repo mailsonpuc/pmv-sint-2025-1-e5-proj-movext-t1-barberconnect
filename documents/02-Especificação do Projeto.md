@@ -60,7 +60,7 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ## Diagrama de Casos de Uso
 
-<img src="img/SistemaV2.svg" width="700px">
+<img src="img/sistemaV3.svg" width="700px">
 
 
 ## Modelo ER (Projeto Conceitual)
