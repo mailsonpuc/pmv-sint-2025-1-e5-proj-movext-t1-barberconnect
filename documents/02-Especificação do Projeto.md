@@ -82,10 +82,60 @@ A partir da compreensão do dia a dia das personas identificadas para o projeto,
 
 
 
+| EU COMO... `PERSONA` | QUERO/PRECISO ... `FUNCIONALIDADE`                                                                                          | PARA ... `MOTIVO/VALOR`                                                                                                                                                                                                                                                                                             |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Leonardo   | agendar um horário com o barbeiro de minha preferência.                                                              |garantir que serei atendido no dia e hora que mais me convém. |
+| Marcos   | dejeso um aplicativo inovador, para acha barbero na minha cidade.                                                             |me organizar e me preparar para atender cada cliente com qualidade. |
+| Diego   | visualizar cortes de barbearia na moda.                                                             |marcar online. |
 
-## Arquitetura e Tecnologias
 
-A arquitetura será baseada no modelo Cliente-Servidor, sendo o servidor uma Web API desenvolvida utilizando o .NET Framework, uma plataforma baseada em C# utilizada aplamente em projetos e com suporte contínuo da Microsoft. Para o Cliente da aplicação será utilizado o React Native, um framework desenvolvido pela Meta, que possui as características do React.js porém otimizado para despostivos móveis. 
+
+
+---
+
+##  Arquitetura e Tecnologias Utilizadas
+
+A arquitetura do sistema será baseada no modelo **Cliente-Servidor**, adotando uma abordagem moderna e escalável, que separa a lógica de apresentação (frontend) da lógica de negócios e persistência (backend). Essa separação facilita a manutenção, a escalabilidade e a integração futura com outros serviços.
+
+###  **Backend (Servidor)**
+
+O servidor será responsável por fornecer uma **Web API RESTful**, desenvolvida com a plataforma **.NET**, utilizando a linguagem **C#**. A escolha do .NET se dá por sua robustez, performance, segurança e suporte contínuo da Microsoft, sendo amplamente adotado em projetos de pequeno a grande porte.
+
+- **Framework**: ASP.NET Core (ou .NET Framework, dependendo da necessidade do projeto)
+- **Linguagem**: C#
+- **Banco de Dados**: SQL Server (pode ser substituído por PostgreSQL ou MySQL, conforme o ambiente)
+- **ORM**: Entity Framework Core, para mapeamento objeto-relacional e manipulação de dados de forma mais simples e segura
+- **Padrões adotados**:
+  - RESTful API
+  - Repository Pattern
+  - Dependency Injection
+  - Camadas separadas (Controller, Service, Repository)
+
+###  **Frontend (Cliente da Aplicação)**
+
+A interface do usuário será construída com **React Native**, um framework multiplataforma criado pela Meta (Facebook), que permite o desenvolvimento de aplicativos móveis nativos para **Android e iOS** utilizando **JavaScript** e **React.js**.
+
+Essa escolha visa proporcionar uma **experiência fluida e moderna ao usuário**, com reutilização de componentes, facilidade de manutenção e redução no tempo de desenvolvimento.
+
+- **Framework**: React Native
+- **Linguagem**: JavaScript (ou TypeScript, opcionalmente)
+- **Bibliotecas de apoio**:
+  - Axios (para chamadas HTTP à API)
+  - React Navigation (para navegação entre telas)
+  - Redux ou Context API (para gerenciamento de estado, se necessário)
+  - Styled-components ou Tailwind CSS (para estilização dos componentes)
+
+### ☁️ Integração e Implantação
+
+- **Hospedagem do Backend**: Azure, AWS ou algum provedor com suporte a aplicações .NET
+- **Banco de Dados**: pode ser hospedado em nuvem junto ao servidor, com backups automatizados
+- **CI/CD**: GitHub Actions, Azure DevOps ou outra pipeline para automatizar testes e deploys
+- **Publicação do App**: Google Play Store e Apple App Store, após os testes e homologações
+
+---
+
+
+
 
 ## Project Model Canvas
 
