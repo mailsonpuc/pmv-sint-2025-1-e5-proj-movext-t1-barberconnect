@@ -2,6 +2,44 @@
 
 <span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
 
+
+---
+
+## Visão Geral da Especificação do Projeto
+
+Nesta etapa do projeto de desenvolvimento do sistema para uma **barbearia**, será apresentada a **especificação funcional e estrutural** do sistema. O objetivo é definir com clareza os requisitos, as funcionalidades e os componentes envolvidos no funcionamento do sistema, garantindo que todas as necessidades do negócio sejam devidamente representadas.
+
+### Técnicas e Ferramentas Utilizadas:
+
+1. **Modelo Entidade-Relacionamento (ER)**
+   - Ferramenta gráfica para representar a estrutura do banco de dados.
+   - Define entidades (ex: Cliente, Barbeiro, Serviço), seus atributos e os relacionamentos entre elas.
+   - Utilizada para organizar e visualizar como os dados serão armazenados.
+
+2. **Derivação para Modelo Lógico Relacional**
+   - Conversão do Modelo ER para tabelas relacionais (modelo lógico).
+   - Define chaves primárias, estrangeiras e integridade referencial.
+   - Base para implementação do banco de dados em SGBDs como MySQL ou PostgreSQL.
+
+3. **Casos de Uso**
+   - Descrição de funcionalidades sob a perspectiva do usuário (ex: “Agendar serviço”, “Cadastrar barbeiro”).
+   - Representa os atores (usuários) e suas interações com o sistema.
+   - Utilizado para identificar os requisitos funcionais.
+
+4. **Diagramas UML (Unified Modeling Language)**
+   - Diagrama de Casos de Uso: mostra o que o sistema faz do ponto de vista do usuário.
+   - Diagrama de Atividades (opcional): mostra o fluxo de ações para processos como agendamento.
+   - Diagrama de Classes (opcional): para representar a estrutura da aplicação orientada a objetos.
+
+5. **Ferramentas Utilizadas**
+   - **Draw.io / Lucidchart**: para criação de diagramas ER e UML.
+   - **MySQL Workbench / DBeaver**: para modelagem e implementação do banco de dados.
+   - **Figma (opcional)**: para prototipagem de interface do sistema.
+
+---
+
+
+
 # Personas
 
 Através de pesquisas de campo dentro do público alvo do projeto, foram estipuladas as personas que seguem juntamente de suas histórias de usuário, dando origem aos requisitos funcionais e não funcionais da aplicação.
