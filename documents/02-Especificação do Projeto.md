@@ -40,6 +40,8 @@ Nesta etapa do projeto de desenvolvimento do sistema para uma **barbearia**, ser
 
 
 
+
+<br><br><br><br>
 # Personas
 
 Através de pesquisas de campo dentro do público alvo do projeto, foram estipuladas as personas que seguem juntamente de suas histórias de usuário, dando origem aos requisitos funcionais e não funcionais da aplicação.
@@ -92,6 +94,10 @@ A partir da compreensão do dia a dia das personas identificadas para o projeto,
 
 
 ---
+<br><br><br><br>
+
+
+
 
 ##  Arquitetura e Tecnologias Utilizadas
 
@@ -137,6 +143,7 @@ Essa escolha visa proporcionar uma **experiência fluida e moderna ao usuário**
 
 
 
+<br><br><br><br>
 ## Project Model Canvas
 
 Colocar a imagem do modelo construído apresentando a proposta de solução.
@@ -144,6 +151,9 @@ Colocar a imagem do modelo construído apresentando a proposta de solução.
 <img src="img/pmCanvas.webp" width="700px">
 
 
+
+
+<br><br><br><br>
 ## Requisitos
 
 As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto. Para determinar a prioridade de requisitos, aplicar uma técnica de priorização de requisitos e detalhar como a técnica foi aplicada.
@@ -190,6 +200,10 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ---
 
+
+
+
+<br><br><br><br>
 ##  Planejamento do Projeto de TI – Sistema para Barbearia
 
 ###  Objetivo
@@ -230,7 +244,7 @@ Desenvolver um sistema de agendamento e gestão para uma barbearia, com aplicati
 
 
 
-<br><br><br>
+<br><br><br><br>
 
 ##  Planejamento de Custos – Projeto de Sistema para Barbearia
 
@@ -267,18 +281,88 @@ Estimar e controlar os custos relacionados ao desenvolvimento e implantação do
 ---
 
 
-<br><br><br>
+
+
+
+<br><br><br><br>
+
+##  Análise da Situação Atual do Processo de Negócio – Barbearia
+
+###  Situação Atual (antes da automação)
+
+A maioria das barbearias ainda opera com processos manuais ou pouco informatizados. Os agendamentos e registros são feitos da seguinte forma:
+
+- **Agendamento por telefone, WhatsApp ou presencialmente**  
+  → Sem controle centralizado; risco de horários duplicados ou esquecidos.
+
+- **Registro de clientes feito em papel ou anotações informais**  
+  → Difícil acompanhar o histórico, preferências ou frequência do cliente.
+
+- **Gerenciamento de horários e agenda do barbeiro manual (caderneta ou planilha)**  
+  → Falta de visibilidade em tempo real, risco de sobreposição.
+
+- **Controle de caixa e serviços feitos no final do dia**  
+  → Sujeito a erros e sem relatórios automatizados.
+
+- **Divulgação da barbearia feita em redes sociais, sem integração com sistema de agendamento**  
+  → O cliente vê a oferta, mas precisa entrar em contato manualmente.
+
+---
+
+### ⚙️ Possibilidades de Automação
+
+Abaixo, as áreas que podem ser automatizadas com o sistema proposto:
+
+| Área de Negócio                | Solução de Automação                                             | Benefícios Esperados                                  |
+|-------------------------------|-------------------------------------------------------------------|--------------------------------------------------------|
+| **Agendamentos**              | App móvel com escolha de serviço, barbeiro e horário disponível  | Elimina conflitos de agenda, reduz chamadas/espera     |
+| **Cadastro de Clientes**      | Registro automático no sistema com histórico                     | Facilita fidelização, promoções e comunicação          |
+| **Agenda do Barbeiro**        | Painel digital com horários, serviços e nome do cliente           | Organização pessoal, ganho de produtividade            |
+| **Pagamentos e Caixa**        | Relatórios financeiros e integração com métodos de pagamento      | Controle financeiro mais claro e seguro                |
+| **Promoções e Notificações**  | Envio de lembretes e promoções via push notification ou e-mail    | Aumenta a fidelização e reduz faltas                   |
+
+---
+
+###  Avaliação de Impacto
+
+| Impacto                      | Antes da Automação                       | Após a Automação                              |
+|-----------------------------|------------------------------------------|------------------------------------------------|
+| **Eficiência Operacional**  | Lenta, propensa a erros manuais          | Automatizada, com menos retrabalho             |
+| **Satisfação do Cliente**   | Depende de atendimento humano direto     | Cliente escolhe horários de forma autônoma     |
+| **Organização Interna**     | Pouco controle de agenda e histórico     | Agenda e dados centralizados e acessíveis      |
+| **Análise de Dados**        | Inexistente (ou manual)                  | Relatórios automáticos e insights gerenciais   |
+| **Escalabilidade**          | Limitada à capacidade de gestão manual   | Sistema permite expansão sem perder controle   |
+
+---
+
+###  Conclusão
+
+Automatizar o processo da barbearia com um sistema digital **traz melhorias diretas na organização, produtividade e experiência do cliente**, além de permitir crescimento e controle com mais facilidade. É um investimento que impacta tanto a rotina operacional quanto as decisões estratégicas do negócio.
+
+---
+
+
+
+
+<br><br><br><br>
 ## Diagrama de Casos de Uso
 
 <img src="img/sistemav4.svg" width="700px">
 
 ---
+<br><br><br><br>
+
+
+
+
 ## Modelagem dos processos : notação BPMN
 
 <img src="img/diagramaBPMN.svg">
 
 
-<br><br><br>
+
+
+<br><br><br><br>
 ## Modelo ER (Projeto Conceitual)
 
 O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.
@@ -289,7 +373,10 @@ A referência abaixo irá auxiliá-lo na geração do artefato “Modelo ER”.
 
 > - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
 
-<br><br><br>
+
+
+
+<br><br><br><br>
 ## Projeto da Base de Dados
 
 O projeto da base de dados corresponde à representação das entidades e relacionamentos identificadas no Modelo ER, no formato de tabelas, com colunas e chaves primárias/estrangeiras necessárias para representar corretamente as restrições de integridade.
