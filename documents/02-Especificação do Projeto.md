@@ -229,6 +229,45 @@ Desenvolver um sistema de agendamento e gestão para uma barbearia, com aplicati
 
 
 
+
+<br><br><br>
+
+##  Planejamento de Custos – Projeto de Sistema para Barbearia
+
+###  Objetivo
+Estimar e controlar os custos relacionados ao desenvolvimento e implantação do sistema de agendamento e gestão para uma barbearia, considerando mão de obra, ferramentas e infraestrutura.
+
+---
+
+###  Cronograma de Custos por Etapa
+
+| Etapa do Projeto             | Recursos Utilizados                           | Custo Estimado (R$) | Período         |
+|-----------------------------|-----------------------------------------------|----------------------|------------------|
+| **1. Levantamento de Requisitos** | Analista de Sistemas (freelancer ou interno)   | R$ 1.200             | Semana 1         |
+| **2. Modelagem e Design**         | Designer UI/UX + Analista                    | R$ 1.500             | Semana 2         |
+| **3. Desenvolvimento Backend**    | Dev .NET (freelancer ou equipe)              | R$ 3.000             | Semanas 3–4      |
+| **4. Desenvolvimento Mobile**     | Dev React Native                             | R$ 3.500             | Semanas 5–6      |
+| **5. Infraestrutura e Deploy**    | Hospedagem (Azure ou AWS) + domínio          | R$ 500 (mensal)      | Semana 7         |
+| **6. Testes e Correções**         | QA Tester + horas extras devs                | R$ 1.000             | Semana 8         |
+| **7. Publicação nas Lojas**       | Google Play (R$ 25 único) / Apple Store (R$ 499 anual) | R$ 524             | Semana 9         |
+| **8. Treinamento e Suporte Inicial** | Suporte técnico + treinamento básico       | R$ 800               | Semana 10        |
+
+---
+
+###  Resumo dos Custos Estimados
+
+| Categoria                     | Valor Total (R$) |
+|------------------------------|------------------|
+| Mão de obra (devs, design, QA) | R$ 10.200        |
+| Infraestrutura (1º mês)        | R$ 500           |
+| Publicação de app              | R$ 524           |
+| Treinamento/Suporte            | R$ 800           |
+| **Total Geral Estimado**       | **R$ 12.024**    |
+
+---
+
+
+<br><br><br>
 ## Diagrama de Casos de Uso
 
 <img src="img/sistemav4.svg" width="700px">
@@ -239,7 +278,7 @@ Desenvolver um sistema de agendamento e gestão para uma barbearia, com aplicati
 <img src="img/diagramaBPMN.svg">
 
 
-
+<br><br><br>
 ## Modelo ER (Projeto Conceitual)
 
 O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.
@@ -250,6 +289,7 @@ A referência abaixo irá auxiliá-lo na geração do artefato “Modelo ER”.
 
 > - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
 
+<br><br><br>
 ## Projeto da Base de Dados
 
 O projeto da base de dados corresponde à representação das entidades e relacionamentos identificadas no Modelo ER, no formato de tabelas, com colunas e chaves primárias/estrangeiras necessárias para representar corretamente as restrições de integridade.
