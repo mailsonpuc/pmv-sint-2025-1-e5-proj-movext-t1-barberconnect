@@ -189,6 +189,12 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 <img src="img/sistemav4.svg" width="700px">
 
+---
+## Modelagem dos processos : notação BPMN
+
+<img src="img/diagramaBPMN.svg">
+
+
 
 ## Modelo ER (Projeto Conceitual)
 
