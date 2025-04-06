@@ -185,6 +185,50 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 |03| O desenvolvimento deve ser feito sem investir em serviços pagos     |
 
 
+
+
+
+---
+
+##  Planejamento do Projeto de TI – Sistema para Barbearia
+
+###  Objetivo
+Desenvolver um sistema de agendamento e gestão para uma barbearia, com aplicativo móvel para clientes e painel administrativo para barbeiros e gestores.
+
+---
+
+###  Etapas do Projeto e Cronograma
+
+| Etapa                       | Atividades principais                                                                 | Responsável           | Duração estimada |
+|----------------------------|----------------------------------------------------------------------------------------|------------------------|------------------|
+| **1. Levantamento de Requisitos** | Entrevistas com clientes e barbeiros, definição das funcionalidades principais         | Analista de Sistemas   | 1 semana         |
+| **2. Modelagem e Especificações** | Criação do modelo ER, histórias de usuário, diagrama de casos de uso e arquitetura     | Analista / Arquiteto   | 1 semana         |
+| **3. Design da Interface**       | Criação dos protótipos de telas no Figma ou similar                                   | Designer UI/UX         | 1 semana         |
+| **4. Desenvolvimento Backend**   | Criação da API com .NET, modelagem do banco, autenticação, endpoints principais       | Desenvolvedor Backend  | 3 semanas        |
+| **5. Desenvolvimento Mobile**    | Telas com React Native, integração com API, autenticação, agendamento, perfil         | Desenvolvedor Mobile   | 2 semanas        |
+| **6. Testes e Validações**      | Testes de usabilidade, testes automatizados, correção de bugs                         | QA / Todos os Devs     | 1 semana         |
+| **7. Implantação**              | Deploy do backend em nuvem, publicação do app em lojas (Google/Apple)                 | DevOps / Equipe Geral  | 1 semana         |
+| **8. Treinamento e Suporte**    | Capacitação para barbeiros e administradores, suporte técnico inicial                 | Analista / Suporte     | Contínuo         |
+
+---
+
+###  Equipe Envolvida
+
+| Função                   | Integrante | Responsabilidades                                                                  |
+|------------------------  |---------   |------------------------------------------------------------------------------------|
+| **Gerente de Projeto**   |            | Coordena prazos, recursos, reuniões e entregas                                     |
+| **Analista de Sistemas** |            | Define os requisitos, desenha as soluções e faz a ponte entre técnico e negócio    |
+| **Designer UI/UX**       |            | Cria protótipos e garante boa experiência do usuário                               |
+| **Desenvolvedor Backend**| Mailson Silva | Cria e mantém a lógica do sistema e a API de comunicação                           |
+| **Desenvolvedor Mobile** |            | Desenvolve o app em React Native, conectando ao backend                            |
+| **Testador (QA)**        | Mailson Silva | Testa funcionalidades, busca bugs e garante a qualidade geral                      |
+| **DevOps (opcional)**    | Mailson Silva  | Cuida do deploy, infraestrutura e automações                                       |
+| **Suporte Técnico**      |            | Apoia os usuários após a entrega                                                   |
+
+---
+
+
+
 ## Diagrama de Casos de Uso
 
 <img src="img/sistemav4.svg" width="700px">
