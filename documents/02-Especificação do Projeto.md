@@ -365,6 +365,7 @@ Automatizar o processo da barbearia com um sistema digital **traz melhorias dire
 <br><br><br><br>
 ## Modelo ER (Projeto Conceitual)
 
+# 
 O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.
 
 Sugestão de ferramentas para geração deste artefato: LucidChart e Draw.io.
@@ -377,6 +378,139 @@ A referência abaixo irá auxiliá-lo na geração do artefato “Modelo ER”.
 
 
 <br><br><br><br>
-## Projeto da Base de Dados
+## Projeto da Base de Dados - Sistema de Agendamento de Barbearia
 
-O projeto da base de dados corresponde à representação das entidades e relacionamentos identificadas no Modelo ER, no formato de tabelas, com colunas e chaves primárias/estrangeiras necessárias para representar corretamente as restrições de integridade.
+# Introdução
+
+Este projeto descreve a base de dados relacional para um sistema de agendamento de serviços em barbearias. O modelo é derivado de um diagrama ER (Entidade-Relacionamento) e contempla as entidades, atributos, chaves primárias e estrangeiras, e todas as restrições de integridade.
+
+---
+
+## 🧱 Estrutura Relacional
+
+Abaixo estão descritas as tabelas do banco de dados, com seus respectivos campos, tipos de dados e restrições.
+
+---
+
+### 🔹 Tabela: `Cliente`
+
+Contém informações dos usuários que realizam agendamentos.
+
+| Campo            | Tipo          | Restrições              |
+|------------------|---------------|--------------------------|
+| `id`             | INT           | PRIMARY KEY              |
+| `nome`           | VARCHAR(100)  | NOT NULL                 |
+| `email`          | VARCHAR(100)  | NOT NULL, UNIQUE         |
+| `senha`          | VARCHAR(100)  | NOT NULL                 |
+| `telefone`       | VARCHAR(20)   |                          |
+| `data_nascimento`| DATE          |                          |
+| `cidade`         | VARCHAR(100)  |                          |
+
+---
+
+### 🔹 Tabela: `Barbearia`
+
+Contém os dados das barbearias cadastradas.
+
+| Campo        | Tipo          | Restrições       |
+|--------------|---------------|------------------|
+| `id`         | INT           | PRIMARY KEY      |
+| `nome`       | VARCHAR(100)  | NOT NULL         |
+| `endereco`   | VARCHAR(200)  |                  |
+| `telefone`   | VARCHAR(20)   |                  |
+
+---
+
+### 🔹 Tabela: `Adm_Barbeiro`
+
+Representa os barbeiros administradores das barbearias.
+
+| Campo           | Tipo          | Restrições                       |
+|-----------------|---------------|----------------------------------|
+| `id`            | INT           | PRIMARY KEY                      |
+| `nome`          | VARCHAR(100)  | NOT NULL                         |
+| `email`         | VARCHAR(100)  | UNIQUE                           |
+| `senha`         | VARCHAR(100)  | NOT NULL                         |
+| `barbearia_id`  | INT           | FOREIGN KEY → `Barbearia(id)`    |
+
+---
+
+### 🔹 Tabela: `Agendamento`
+
+Registra os horários agendados pelos clientes com os barbeiros.
+
+| Campo             | Tipo          | Restrições                               |
+|-------------------|---------------|------------------------------------------|
+| `id`              | INT           | PRIMARY KEY                              |
+| `data`            | DATE          | NOT NULL                                 |
+| `hora`            | TIME          | NOT NULL                                 |
+| `forma_pagamento` | VARCHAR(50)   |                                          |
+| `cliente_id`      | INT           | FOREIGN KEY → `Cliente(id)`              |
+| `adm_barbeiro_id` | INT           | FOREIGN KEY → `Adm_Barbeiro(id)`         |
+
+---
+
+### 🔹 Tabela: `Avaliacao`
+
+Contém comentários e avaliações do cliente sobre o serviço.
+
+| Campo            | Tipo        | Restrições                                 |
+|------------------|-------------|--------------------------------------------|
+| `id`             | INT         | PRIMARY KEY                                |
+| `mensagem`       | TEXT        |                                            |
+| `agendamento_id` | INT         | UNIQUE, FOREIGN KEY → `Agendamento(id)`    |
+
+---
+
+## 🔐 Restrições de Integridade
+
+- **Chaves primárias** garantem a unicidade dos registros.
+- **Chaves estrangeiras** asseguram integridade entre relacionamentos.
+- **Relacionamento 1:N** entre:
+  - Cliente e Agendamento
+  - Barbearia e Adm_Barbeiro
+  - Adm_Barbeiro e Agendamento
+- **Relacionamento 1:1** entre Agendamento e Avaliação com restrição `UNIQUE`.
+
+---
+
+## 💡 Regras de Negócio
+
+- Um cliente pode realizar múltiplos agendamentos.
+- Cada barbearia pode ter vários barbeiros.
+- Um agendamento pertence a um único barbeiro.
+- Cada agendamento pode ter uma avaliação única associada.
+- O sistema permite controle de histórico de cortes e comentários.
+
+---
+
+## 🔄 Possibilidades de Expansão
+
+- Serviços detalhados por barbeiro
+- Histórico com imagens dos cortes
+- Sistema de notas (1 a 5 estrelas)
+- Notificações via e-mail ou WhatsApp
+- Integração com sistema de pagamentos
+
+---
+
+## 🛠️ Tecnologias Recomendadas
+
+- **Banco de Dados**: PostgreSQL, MySQL ou SQL Server
+- **Backend**: Node.js, .NET Core, Django ou Laravel
+- **Frontend**: React, Vue ou Angular
+- **ORM**: Sequelize, Prisma, Entity Framework, TypeORM
+
+---
+
+## 📌 Conclusão
+
+Este projeto tem como objetivo geral desenvolver uma estrutura de banco de dados relacional que ofereça suporte a um sistema de agendamento de serviços para barbearias, promovendo o controle eficaz de clientes, profissionais (barbeiros), horários, formas de pagamento e avaliações de serviços prestados.
+
+A modelagem proposta assegura a integridade dos dados através de chaves primárias e estrangeiras, define claramente os relacionamentos entre as entidades e permite futuras expansões, como integração com serviços de pagamento, notificações automáticas e controle de histórico de atendimentos.
+
+Trata-se de uma base sólida, escalável e aderente a boas práticas de modelagem, apta a ser implementada em sistemas reais voltados ao setor de serviços pessoais.
+
+
+
+
