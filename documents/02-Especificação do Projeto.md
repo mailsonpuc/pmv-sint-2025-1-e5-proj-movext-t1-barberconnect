@@ -496,10 +496,10 @@ Contém comentários e avaliações do cliente sobre o serviço.
 
 ## 🛠️ Tecnologias Recomendadas
 
-- **Banco de Dados**: PostgreSQL, MySQL ou SQL Server
-- **Backend**: Node.js, .NET Core, Django ou Laravel
-- **Frontend**: React, Vue ou Angular
-- **ORM**: Sequelize, Prisma, Entity Framework, TypeORM
+- **Banco de Dados**: MySQL ou SQL Server
+- **Backend**: Node.js, .NET Core
+- **Frontend**: React
+- **ORM**: Entity Framework
 
 ---
 
