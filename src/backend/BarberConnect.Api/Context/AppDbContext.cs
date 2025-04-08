@@ -16,6 +16,6 @@ namespace BarberConnect.Api.Context
 
         //mapeamento
         public DbSet<Cliente>? Clientes { get; set; }
-
+        public DbSet<ServicoModel>? Servicos { get; set; }
     }
 }
