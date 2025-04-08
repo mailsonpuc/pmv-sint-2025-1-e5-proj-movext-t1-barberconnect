@@ -365,16 +365,7 @@ Automatizar o processo da barbearia com um sistema digital **traz melhorias dire
 <br><br><br><br>
 ## Modelo ER (Projeto Conceitual)
 
-# 
-O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.
-
-Sugestão de ferramentas para geração deste artefato: LucidChart e Draw.io.
-
-A referência abaixo irá auxiliá-lo na geração do artefato “Modelo ER”.
-
-> - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
-
-
+![image](https://github.com/user-attachments/assets/9987dfeb-bc68-4cf2-a0ba-a38d36449144)
 
 
 <br><br><br><br>
@@ -399,7 +390,7 @@ Contém informações dos usuários que realizam agendamentos.
 | Campo            | Tipo          | Restrições              |
 |------------------|---------------|--------------------------|
 | `id`             | INT           | PRIMARY KEY              |
-| `nome`           | VARCHAR(100)  | NOT NULL                 |
+| `nome`           | VARCHAR(100)  |                |
 | `email`          | VARCHAR(100)  | NOT NULL, UNIQUE         |
 | `senha`          | VARCHAR(100)  | NOT NULL                 |
 | `telefone`       | VARCHAR(20)   |                          |
@@ -408,30 +399,31 @@ Contém informações dos usuários que realizam agendamentos.
 
 ---
 
-### 🔹 Tabela: `Barbearia`
+### 🔹 Tabela: `Barbeiro`
 
 Contém os dados das barbearias cadastradas.
 
-| Campo        | Tipo          | Restrições       |
-|--------------|---------------|------------------|
-| `id`         | INT           | PRIMARY KEY      |
-| `nome`       | VARCHAR(100)  | NOT NULL         |
-| `endereco`   | VARCHAR(200)  |                  |
-| `telefone`   | VARCHAR(20)   |                  |
+| Campo        | Tipo          | Restrições                      |
+|--------------|---------------|---------------------------------|
+| `id`         | INT           | PRIMARY KEY, AUTO_INCREMENT     |
+| `nome`       | VARCHAR(100)  |                                 |
+| `email`      | VARCHAR(100)  | NOT NULL, UNIQUE                |
+| `senha`      | VARCHAR(200)  | NOT NULL                        |
+| `telefone`   | VARCHAR(20)   |                                 |
 
 ---
 
-### 🔹 Tabela: `Adm_Barbeiro`
+### 🔹 Tabela: `Servico`
 
 Representa os barbeiros administradores das barbearias.
 
 | Campo           | Tipo          | Restrições                       |
 |-----------------|---------------|----------------------------------|
-| `id`            | INT           | PRIMARY KEY                      |
-| `nome`          | VARCHAR(100)  | NOT NULL                         |
-| `email`         | VARCHAR(100)  | UNIQUE                           |
-| `senha`         | VARCHAR(100)  | NOT NULL                         |
-| `barbearia_id`  | INT           | FOREIGN KEY → `Barbearia(id)`    |
+| `id`            | INT           | PRIMARY KEY, AUTO_INCREMENT      |
+| `nome`          | VARCHAR(100)  |                                  |
+| `descricao`     | TEXT          |                                  |
+| `duracao`       | INT           | Em minutos                       |
+| `preco`         | DECIMAL       |                                  |
 
 ---
 
@@ -439,14 +431,28 @@ Representa os barbeiros administradores das barbearias.
 
 Registra os horários agendados pelos clientes com os barbeiros.
 
-| Campo             | Tipo          | Restrições                               |
-|-------------------|---------------|------------------------------------------|
-| `id`              | INT           | PRIMARY KEY                              |
-| `data`            | DATE          | NOT NULL                                 |
-| `hora`            | TIME          | NOT NULL                                 |
-| `forma_pagamento` | VARCHAR(50)   |                                          |
-| `cliente_id`      | INT           | FOREIGN KEY → `Cliente(id)`              |
-| `adm_barbeiro_id` | INT           | FOREIGN KEY → `Adm_Barbeiro(id)`         |
+| Campo               | Tipo          | Restrições                                     |
+|---------------------|---------------|------------------------------------------------|
+| `id_agendamento`    | INT           | PRIMARY KEY, AUTO_INCREMENT                  |
+| `status`            | VARCHAR(100)  |                                              |
+| `lembrete_enviado`  | BOOLEAN       |                                              |
+| `id_cliente`        | INT           | FOREIGN KEY → Cliente(id_cliente)            |
+| `id_servico`        | INT           | FOREIGN KEY → Servico(id_servico)            |
+| `id_horario`        | INT           | FOREIGN KEY → HorarioDisponivel(id_horario)  |
+
+---
+
+### 🔹 Tabela: `HorarioDisponivel`
+
+Contém comentários e avaliações do cliente sobre o serviço.
+
+| Campo            | Tipo        | Restrições                                 |
+|------------------|-------------|--------------------------------------------|
+| `id_horario`     | INT         | PRIMARY KEY, AUTO_INCREMENT                |
+| `id_barbeiro`    | INT         | FOREIGN KEY → Barbeiro(id_barbeiro)        |
+| `data`           | DATE        |                                            |
+| `hora_inicio`    | TIME        |                                            |
+| `hora_fim`       | TIME        |                                            |
 
 ---
 
@@ -454,11 +460,26 @@ Registra os horários agendados pelos clientes com os barbeiros.
 
 Contém comentários e avaliações do cliente sobre o serviço.
 
-| Campo            | Tipo        | Restrições                                 |
-|------------------|-------------|--------------------------------------------|
-| `id`             | INT         | PRIMARY KEY                                |
-| `mensagem`       | TEXT        |                                            |
-| `agendamento_id` | INT         | UNIQUE, FOREIGN KEY → `Agendamento(id)`    |
+| Campo              | Tipo        | Restrições                                 |
+|--------------------|-------------|--------------------------------------------|
+| `id_avaliacao`     | INT         | PRIMARY KEY, AUTO_INCREMENT                |
+| `nota`             | INT         |                                            |
+| `comentario`       | TEXT        |                                            |
+| `data`             | DATE        |                                            |
+| `id_agendamento`   | INT         | FOREIGN KEY → Agendamento(id_agendamento)  |
+
+---
+
+### 🔹 Tabela: `HistoricoCorte`
+
+Contém comentários e avaliações do cliente sobre o serviço.
+
+| Campo              | Tipo        | Restrições                                 |
+|--------------------|-------------|--------------------------------------------|
+| `id_historico`     | INT         | PRIMARY KEY, AUTO_INCREMENT                |
+| `foto`             | TEXT        |                                            |
+| `observacoes`      | TEXT        |                                            |
+| `id_agendamento`   | INT         | FOREIGN KEY → Agendamento(id_agendamento)  |
 
 ---
 
@@ -466,21 +487,23 @@ Contém comentários e avaliações do cliente sobre o serviço.
 
 - **Chaves primárias** garantem a unicidade dos registros.
 - **Chaves estrangeiras** asseguram integridade entre relacionamentos.
-- **Relacionamento 1:N** entre:
-  - Cliente e Agendamento
-  - Barbearia e Adm_Barbeiro
-  - Adm_Barbeiro e Agendamento
-- **Relacionamento 1:1** entre Agendamento e Avaliação com restrição `UNIQUE`.
+- **Relacionamentos principais**:
+  - Cliente → Agendamento (1:N)
+  - Barbeiro → HorarioDisponivel (1:N)
+  - HorarioDisponivel → Agendamento (1:N)
+  - Servico → Agendamento (1:N)
+  - Agendamento → Avaliacao (1:1)
+  - Agendamento → HistoricoCorte (1:1)
 
 ---
 
 ## 💡 Regras de Negócio
 
-- Um cliente pode realizar múltiplos agendamentos.
-- Cada barbearia pode ter vários barbeiros.
-- Um agendamento pertence a um único barbeiro.
-- Cada agendamento pode ter uma avaliação única associada.
-- O sistema permite controle de histórico de cortes e comentários.
+- Cada cliente pode realizar múltiplos agendamentos.
+- Cada barbeiro tem sua agenda de horários.
+- Todos os barbeiros oferecem os mesmos serviços.
+- Cada agendamento pode ser avaliado e ter um histórico.
+- O barbeiro consegue acessar o histórico de cortes dos clientes através dos agendamentos.
 
 ---
 
@@ -488,9 +511,9 @@ Contém comentários e avaliações do cliente sobre o serviço.
 
 - Serviços detalhados por barbeiro
 - Histórico com imagens dos cortes
-- Sistema de notas (1 a 5 estrelas)
+- Chat com o barbeiro via WhatsApp
 - Notificações via e-mail ou WhatsApp
-- Integração com sistema de pagamentos
+- Pagamento online via integração com gateways
 
 ---
 
@@ -505,9 +528,9 @@ Contém comentários e avaliações do cliente sobre o serviço.
 
 ## 📌 Conclusão
 
-Este projeto tem como objetivo geral desenvolver uma estrutura de banco de dados relacional que ofereça suporte a um sistema de agendamento de serviços para barbearias, promovendo o controle eficaz de clientes, profissionais (barbeiros), horários, formas de pagamento e avaliações de serviços prestados.
+Este projeto tem como objetivo geral desenvolver uma estrutura de banco de dados relacional que ofereça suporte a um sistema de agendamento de serviços para barbearias, promovendo o controle eficaz de clientes, profissionais (barbeiros), agendamento, lembrete de agendamento, catálogo de serviços, histórico de cortes e avaliações de serviços prestados.
 
-A modelagem proposta assegura a integridade dos dados através de chaves primárias e estrangeiras, define claramente os relacionamentos entre as entidades e permite futuras expansões, como integração com serviços de pagamento, notificações automáticas e controle de histórico de atendimentos.
+A modelagem proposta assegura a integridade dos dados através de chaves primárias e estrangeiras, define claramente os relacionamentos entre as entidades e permite futuras expansões, como pagamento online e notificações automáticas por outros aplicativos.
 
 Trata-se de uma base sólida, escalável e aderente a boas práticas de modelagem, apta a ser implementada em sistemas reais voltados ao setor de serviços pessoais.
 
