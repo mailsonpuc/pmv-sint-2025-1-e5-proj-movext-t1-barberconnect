@@ -365,7 +365,8 @@ Automatizar o processo da barbearia com um sistema digital **traz melhorias dire
 <br><br><br><br>
 ## Modelo ER (Projeto Conceitual)
 
-![image](https://github.com/user-attachments/assets/7d2c1926-1dab-41c7-95f4-7f37a9d8c170)
+![image](https://github.com/user-attachments/assets/8a369fcb-b8d5-4446-9f70-030afe6a4175)
+
 
 
 
@@ -413,6 +414,22 @@ Contém os dados das barbearias cadastradas.
 
 ---
 
+### 🔹 Tabela: `Oferece`
+
+Representa os serviços oferecidos por cada barbeiro, com preços e durações personalizados.
+
+| Campo           | Tipo                               | Restrições                       |
+|-----------------|------------------------------------|----------------------------------|
+| `id_barbeiro`   | INT                                | FOREIGN KEY → Barbeiro(id)       |
+| `id_servico`    | INT                                | FOREIGN KEY → Servico(id)        |
+| `preco`         | DECIMAL                            | NOT NULL                         |
+| `duracao`       | INT                                | NOT NULL(em minutos)             |
+| PRIMARY KEY     | (id_barbeiro, id_servico)          | Chave composta                   |
+
+Tabela Oferece representa a associação entre barbeiros e os serviços que eles oferecem, incluindo a personalização de preço e duração.
+
+---
+
 ### 🔹 Tabela: `Servico`
 
 Representa os barbeiros administradores das barbearias.
@@ -422,8 +439,6 @@ Representa os barbeiros administradores das barbearias.
 | `id`            | INT           | PRIMARY KEY, AUTO_INCREMENT      |
 | `nome`          | VARCHAR(100)  |                                  |
 | `descricao`     | TEXT          |                                  |
-| `duracao`       | INT           | Em minutos                       |
-| `preco`         | DECIMAL       |                                  |
 
 ---
 
