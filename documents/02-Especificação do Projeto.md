@@ -365,7 +365,8 @@ Automatizar o processo da barbearia com um sistema digital **traz melhorias dire
 <br><br><br><br>
 ## Modelo ER (Projeto Conceitual)
 
-![image](https://github.com/user-attachments/assets/9987dfeb-bc68-4cf2-a0ba-a38d36449144)
+![image](https://github.com/user-attachments/assets/7d2c1926-1dab-41c7-95f4-7f37a9d8c170)
+
 
 
 <br><br><br><br>
@@ -395,7 +396,6 @@ Contém informações dos usuários que realizam agendamentos.
 | `senha`          | VARCHAR(100)  | NOT NULL                 |
 | `telefone`       | VARCHAR(20)   |                          |
 | `data_nascimento`| DATE          |                          |
-| `cidade`         | VARCHAR(100)  |                          |
 
 ---
 
