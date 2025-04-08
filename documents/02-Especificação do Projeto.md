@@ -365,7 +365,8 @@ Automatizar o processo da barbearia com um sistema digital **traz melhorias dire
 <br><br><br><br>
 ## Modelo ER (Projeto Conceitual)
 
-![image](https://github.com/user-attachments/assets/8a369fcb-b8d5-4446-9f70-030afe6a4175)
+![image](https://github.com/user-attachments/assets/84ef892c-f774-4bf5-97b8-f1bf1023bd03)
+
 
 
 
