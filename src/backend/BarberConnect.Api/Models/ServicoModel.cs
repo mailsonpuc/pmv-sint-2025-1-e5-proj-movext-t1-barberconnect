@@ -5,7 +5,5 @@
         public int IdServico { get; set; }
         public string? NomeServico { get; set; }
         public string? DescricaoServico { get; set; }
-        public int Duracao { get; set; }
-        public decimal Preco { get; set; }
     }
 }
