@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using BarberConnect.Api.Context;
 using BarberConnect.Api.Models;
+using BarberConnect.Api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,20 +11,21 @@ namespace BarberConnect.Api.Controllers
     [Route("api/[controller]")]
     public class ClientesController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        //usando a interface do repository
+        private readonly IRepository<Cliente> _repository;
 
         //construtor
-        public ClientesController(AppDbContext context)
+        public ClientesController(IRepository<Cliente> repository)
         {
-            _context = context;
+            _repository = repository;
         }
-
 
 
         [HttpGet]
         public ActionResult<IEnumerable<Cliente>> Get()
         {
-            return _context.Clientes.ToList();
+            var clientes = _repository.GetAll();
+            return Ok(clientes);
         }
 
 
@@ -36,13 +35,14 @@ namespace BarberConnect.Api.Controllers
         [HttpGet("{id:int}", Name = "ObterClientePorId")]
         public ActionResult<Cliente> Get(int id)
         {
-            var cliente = _context.Clientes?.FirstOrDefault(p => p.ClienteId == id);
+            var cliente = _repository.Get(c => c.ClienteId == id);
             if (cliente is null)
             {
                 return NotFound("Não encontrado");
             }
 
-            return cliente;
+           return Ok(cliente);
+
 
         }
 
@@ -56,11 +56,11 @@ namespace BarberConnect.Api.Controllers
             {
                 return BadRequest("Ocorreu um erro, cheque os dados");
             }
-            _context.Clientes?.Add(cliente);
-            _context.SaveChanges();
+
+            var clienteCriado = _repository.Create(cliente);
 
             return new CreatedAtRouteResult("ObterClientePorId",
-            new { id = cliente.ClienteId }, cliente);
+            new { id = clienteCriado.ClienteId }, clienteCriado);
 
         }
 
@@ -75,8 +75,7 @@ namespace BarberConnect.Api.Controllers
                 return BadRequest("Ocorreu um erro");
             }
 
-            _context.Entry(cliente).State = EntityState.Modified;
-            _context.SaveChanges();
+            _repository.Update(cliente);
             return Ok(cliente);
         }
 
@@ -88,16 +87,16 @@ namespace BarberConnect.Api.Controllers
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
-            var cliente = _context.Clientes?.FirstOrDefault(p => p.ClienteId == id);
+            var cliente = _repository.Get(c => c.ClienteId == id);
             if (cliente is null)
             {
                 return NotFound("cliente não Localizado...");
             }
 
-            _context.Clientes?.Remove(cliente);
-            _context.SaveChanges();
 
-            return Ok(cliente);
+
+            var clienteExcluido = _repository.Delete(cliente);
+            return Ok(clienteExcluido);
         }
 
 
