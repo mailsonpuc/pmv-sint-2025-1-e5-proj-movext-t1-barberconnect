@@ -5,9 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BarberConnect.Api.Models
 {
-    public class Cliente
+    public class Barbeiro
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(100)]
@@ -18,14 +19,10 @@ namespace BarberConnect.Api.Models
         public string Email { get; set; } = null!;
 
         [Required]
-        [StringLength(100)]
+        [StringLength(200)]
         public string Senha { get; set; } = null!;
 
         [StringLength(20)]
         public string? Telefone { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? DataNascimento { get; set; }
     }
 }
-
