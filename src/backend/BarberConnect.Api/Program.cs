@@ -1,7 +1,8 @@
 using BarberConnect.Api.Context;
+using BarberConnect.Api.Repository;
+using BarberConnect.Api.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-// using BarberConnect.Api.Repositories;
-// using BarberConnect.Api.Repositories.Interfaces;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseInMemoryDatabase("MeuDb"));
 
-// builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
-// builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
+builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+
 
 
 builder.Services.AddControllers();

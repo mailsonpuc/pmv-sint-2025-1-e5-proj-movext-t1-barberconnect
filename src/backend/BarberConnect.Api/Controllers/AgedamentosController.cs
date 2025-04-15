@@ -1,108 +1,106 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BarberConnect.Api.Context;
 using BarberConnect.Api.Models;
+using BarberConnect.Api.Repository.Interfaces;
 
 namespace BarberConnect.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AgedamentosController : ControllerBase
+    public class AgendamentosController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IRepository<Agendamento> _repository;
 
-        public AgedamentosController(AppDbContext context)
+        public AgendamentosController(IRepository<Agendamento> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Agedamentos
+        // GET: api/Agendamentos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Agendamento>>> GetAgendamentos()
         {
-            return await _context.Agendamentos.ToListAsync();
+            var agendamentos = await _repository.GetAllAsync();
+            return Ok(agendamentos);
         }
 
-        // GET: api/Agedamentos/5
+        // GET: api/Agendamentos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Agendamento>> GetAgendamento(int id)
         {
-            var agendamento = await _context.Agendamentos.FindAsync(id);
+            var agendamento = await _repository.GetAsync(a => a.IdAgendamento == id);
 
             if (agendamento == null)
             {
-                return NotFound();
+                return NotFound("Agendamento não encontrado");
             }
 
             return agendamento;
         }
 
-        // PUT: api/Agedamentos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/Agendamentos/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAgendamento(int id, Agendamento agendamento)
         {
             if (id != agendamento.IdAgendamento)
             {
-                return BadRequest();
+                return BadRequest("ID do agendamento não corresponde");
             }
-
-            _context.Entry(agendamento).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.UpdateAsync(agendamento);
+                return NoContent();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
-                if (!AgendamentoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return StatusCode(500, "Ocorreu um erro ao atualizar o agendamento");
             }
-
-            return NoContent();
         }
 
-        // POST: api/Agedamentos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/Agendamentos
         [HttpPost]
         public async Task<ActionResult<Agendamento>> PostAgendamento(Agendamento agendamento)
         {
-            _context.Agendamentos.Add(agendamento);
-            await _context.SaveChangesAsync();
+            if (agendamento == null)
+            {
+                return BadRequest("Dados do agendamento inválidos");
+            }
 
-            return CreatedAtAction("GetAgendamento", new { id = agendamento.IdAgendamento }, agendamento);
+            try
+            {
+                var agendamentoCriado = await _repository.CreateAsync(agendamento);
+                return CreatedAtAction(nameof(GetAgendamento), 
+                    new { id = agendamentoCriado.IdAgendamento }, 
+                    agendamentoCriado);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro ao criar o agendamento");
+            }
         }
 
-        // DELETE: api/Agedamentos/5
+        // DELETE: api/Agendamentos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAgendamento(int id)
         {
-            var agendamento = await _context.Agendamentos.FindAsync(id);
+            var agendamento = await _repository.GetAsync(a => a.IdAgendamento == id);
             if (agendamento == null)
             {
-                return NotFound();
+                return NotFound("Agendamento não encontrado");
             }
 
-            _context.Agendamentos.Remove(agendamento);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool AgendamentoExists(int id)
-        {
-            return _context.Agendamentos.Any(e => e.IdAgendamento == id);
+            try
+            {
+                await _repository.DeleteAsync(agendamento);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ocorreu um erro ao excluir o agendamento");
+            }
         }
     }
 }
