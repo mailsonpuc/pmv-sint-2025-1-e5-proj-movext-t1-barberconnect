@@ -14,15 +14,12 @@ namespace BarberConnect.Api.Models
         [StringLength(100)]
         public string? Nome { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Email { get; set; } = null!;
-
-        [Required]
-        [StringLength(200)]
-        public string Senha { get; set; } = null!;
-
         [StringLength(20)]
         public string? Telefone { get; set; }
+
+        public int ServicoId { get; set; }
+
+        public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
+        public ICollection<Servico> Servico { get; set; } = new List<Servico>();
     }
 }
