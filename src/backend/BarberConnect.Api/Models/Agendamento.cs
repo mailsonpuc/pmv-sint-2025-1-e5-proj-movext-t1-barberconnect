@@ -27,5 +27,8 @@ namespace BarberConnect.Api.Models
         [ForeignKey("HorarioDisponivel")]
         public int IdHorario { get; set; }
         public HorarioDisponivel HorarioDisponivel { get; set; } = null!;
+
+        public int IdBarbeiro { get; set; }
+        public Barbeiro Barbeiro { get; set; }
     }
 }

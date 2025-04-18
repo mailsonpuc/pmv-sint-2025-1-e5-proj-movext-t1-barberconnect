@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BarberConnect.Api.Context;
 using BarberConnect.Api.Models;
+using BarberConnect.Api.Comunication;
 
 namespace BarberConnect.Api.Controllers
 {
@@ -21,18 +22,50 @@ namespace BarberConnect.Api.Controllers
             _context = context;
         }
 
-        // GET: api/Avaliacaos
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Avaliacao>>> GetAvaliacoes()
+        [HttpPost]
+        public async Task<ActionResult<Avaliacao>> PostAvaliacao([FromBody] AvaliaçãoRequest request)
         {
-            return await _context.Avaliacoes.ToListAsync();
-        }
+            var agendamento = await _context.Agendamentos.FirstOrDefaultAsync(a => a.IdAgendamento == request.IdAgendamento);
 
-        // GET: api/Avaliacaos/5
+            if (agendamento == null)
+            {
+                return NotFound();
+            }
+
+            if (agendamento.Status != "Concluído")
+            {
+                return BadRequest("Avaliação só pode ser realizada após concluída");
+            }
+
+            if (await _context.Avaliacoes.AnyAsync(e => e.IdAgendamento == request.IdAgendamento))
+            {
+                return BadRequest("Este agendamento já foi avaliado.");
+            }
+
+            var avaliacao = new Avaliacao()
+            {
+                Nota = request.Nota,
+                Comentario = request.Comentario,
+                BarbeiroId = agendamento.IdBarbeiro,
+                ClienteId = agendamento.IdCliente,
+                IdAgendamento = agendamento.IdAgendamento
+
+            };
+            _context.Avaliacoes.Add(avaliacao);
+            await _context.SaveChangesAsync();
+
+
+            return CreatedAtAction(nameof(GetAvaliacao), new { id = avaliacao.IdAvaliacao }, avaliacao);
+
+        }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Avaliacao>> GetAvaliacao(int id)
+        public async Task<ActionResult<Avaliacao>> GetAvaliacao([FromRoute] int id)
         {
-            var avaliacao = await _context.Avaliacoes.FindAsync(id);
+            var avaliacao = await _context.Avaliacoes
+                .Include(e => e.Cliente)
+                .Include(e => e.Barbeiro)
+                .Include(e => e.Agendamento)
+                .FirstOrDefaultAsync(e => e.IdAvaliacao == id);
 
             if (avaliacao == null)
             {
@@ -41,68 +74,14 @@ namespace BarberConnect.Api.Controllers
 
             return avaliacao;
         }
-
-        // PUT: api/Avaliacaos/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAvaliacao(int id, Avaliacao avaliacao)
+        [HttpGet("barbeiro/{barbeiroId}")]
+        public async Task<ActionResult<IEnumerable<Avaliacao>>> GetAvaliacoesPorBarbeiro(int barbeiroId)
         {
-            if (id != avaliacao.IdAvaliacao)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(avaliacao).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AvaliacaoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Avaliacaos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Avaliacao>> PostAvaliacao(Avaliacao avaliacao)
-        {
-            _context.Avaliacoes.Add(avaliacao);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAvaliacao", new { id = avaliacao.IdAvaliacao }, avaliacao);
-        }
-
-        // DELETE: api/Avaliacaos/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAvaliacao(int id)
-        {
-            var avaliacao = await _context.Avaliacoes.FindAsync(id);
-            if (avaliacao == null)
-            {
-                return NotFound();
-            }
-
-            _context.Avaliacoes.Remove(avaliacao);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool AvaliacaoExists(int id)
-        {
-            return _context.Avaliacoes.Any(e => e.IdAvaliacao == id);
+            return await _context.Avaliacoes
+                .Include(e => e.Cliente)
+                .Include(e => e.Agendamento)
+                .Where(e => e.BarbeiroId == barbeiroId)
+                .ToListAsync();
         }
     }
 }

@@ -14,11 +14,12 @@ namespace BarberConnect.Api.Models
 
         public string? Comentario { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? Data { get; set; }
-
         [ForeignKey("Agendamento")]
         public int IdAgendamento { get; set; }
         public Agendamento Agendamento { get; set; } = null!;
+        public int ClienteId { get; set; } 
+        public int BarbeiroId { get; set; }
+        public Cliente Cliente { get; set; }
+        public Barbeiro Barbeiro { get; set; }
     }
 }
