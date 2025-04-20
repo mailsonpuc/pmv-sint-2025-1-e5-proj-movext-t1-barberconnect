@@ -17,7 +17,7 @@ namespace BarberConnect.Api.Models
         [StringLength(20)]
         public string? Telefone { get; set; }
 
-        public int ServicoId { get; set; }
+
 
         public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
         public ICollection<Servico> Servico { get; set; } = new List<Servico>();

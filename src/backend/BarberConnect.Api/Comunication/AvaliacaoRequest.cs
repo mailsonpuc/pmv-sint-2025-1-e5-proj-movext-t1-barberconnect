@@ -2,7 +2,7 @@
 
 namespace BarberConnect.Api.Comunication
 {
-    public class AvaliaçãoRequest
+    public class AvaliacaoRequest
     {
         [Range(1, 5)]
         public int Nota { get; set; }

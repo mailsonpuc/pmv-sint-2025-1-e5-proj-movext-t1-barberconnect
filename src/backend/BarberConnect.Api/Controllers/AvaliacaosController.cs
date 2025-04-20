@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BarberConnect.Api.Context;
 using BarberConnect.Api.Models;
 using BarberConnect.Api.Comunication;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BarberConnect.Api.Controllers
 {
@@ -23,39 +25,45 @@ namespace BarberConnect.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Avaliacao>> PostAvaliacao([FromBody] AvaliaçãoRequest request)
+        [Authorize(Policy = "Cliente")] 
+        public async Task<ActionResult<AvaliacaoResponse>> PostAvaliacao(
+        [FromBody] AvaliacaoRequest request)
         {
-            var agendamento = await _context.Agendamentos.FirstOrDefaultAsync(a => a.IdAgendamento == request.IdAgendamento);
+            
+         
+
+            // Buscar agendamento
+            var agendamento = await _context.Agendamentos
+                .FirstOrDefaultAsync(a =>
+                    a.IdAgendamento  == request.IdAgendamento );
 
             if (agendamento == null)
             {
-                return NotFound();
+                return BadRequest("Agendamento não encontrado ou não concluído.");
             }
 
-            if (agendamento.Status != "Concluído")
+            // Verificar se já existe avaliação
+            if (await _context.Avaliacoes.AnyAsync(a => a.IdAgendamento == request.IdAgendamento))
             {
-                return BadRequest("Avaliação só pode ser realizada após concluída");
+                return Conflict("Este agendamento já foi avaliado.");
             }
 
-            if (await _context.Avaliacoes.AnyAsync(e => e.IdAgendamento == request.IdAgendamento))
-            {
-                return BadRequest("Este agendamento já foi avaliado.");
-            }
-
-            var avaliacao = new Avaliacao()
+            // Criar avaliação
+            var avaliacao = new Avaliacao
             {
                 Nota = request.Nota,
                 Comentario = request.Comentario,
-                BarbeiroId = agendamento.IdBarbeiro,
+                IdAgendamento = agendamento.IdAgendamento,
                 ClienteId = agendamento.IdCliente,
-                IdAgendamento = agendamento.IdAgendamento
-
+                BarbeiroId = agendamento.IdBarbeiro
             };
+
             _context.Avaliacoes.Add(avaliacao);
             await _context.SaveChangesAsync();
 
-
-            return CreatedAtAction(nameof(GetAvaliacao), new { id = avaliacao.IdAvaliacao }, avaliacao);
+            // Retornar DTO com dados relevantes
+            return CreatedAtAction(nameof(GetAvaliacao), new { id = avaliacao.IdAvaliacao },
+                new AvaliacaoResponse(avaliacao));
 
         }
         [HttpGet("{id}")]

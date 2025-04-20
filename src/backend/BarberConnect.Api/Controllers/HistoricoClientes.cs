@@ -1,5 +1,6 @@
 ﻿using BarberConnect.Api.Comunication;
 using BarberConnect.Api.Context;
+using BarberConnect.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,41 +20,26 @@ namespace BarberConnect.Api.Controllers
         }
 
         [HttpGet("historico")]
-        public async Task<ActionResult<IEnumerable<AgendamentoBarbeiroDTO>>> GetHistoricoAtendimentos(
-        [FromQuery] DateTime? startDate,
-        [FromQuery] DateTime? endDate,
+        public async Task<ActionResult<IEnumerable<Agendamento>>> GetHistoricoAtendimentos(
+        
         [FromQuery] string? status,
         [FromQuery] string? clienteNome,
+        [FromQuery] int barbeiroId,
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10)
+        
         {
-            // Obter ID do barbeiro autenticado
-            var usuarioId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var barbeiro = await _context.Barbeiros
-                .FirstOrDefaultAsync(b => b.UsuarioId == usuarioId);
-
-            if (barbeiro == null)
-            {
-                return NotFound("Barbeiro não encontrado.");
-            }
+            
 
             // Query base
             var query = _context.Agendamentos
                 .Include(a => a.Cliente)
                 .Include(a => a.Servico)
-                .Where(a => a.IdBarbeiro == barbeiro.Id)
+                .Where(a => a.IdBarbeiro == barbeiroId)
                 .AsQueryable();
 
             // Aplicar filtros
-            if (startDate != null)
-            {
-                query = query.Where(a => a.DataHora >= startDate);
-            }
-
-            if (endDate != null)
-            {
-                query = query.Where(a => a.DataHora <= endDate);
-            }
+            
 
             if (!string.IsNullOrEmpty(status))
             {
@@ -67,14 +53,12 @@ namespace BarberConnect.Api.Controllers
 
             // Paginação
             var agendamentos = await query
-                .OrderByDescending(a => a.DataHora)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .Select(a => new HistoricoResponse
 
                 {
-                    Id = a.Id,
-                    DataHora = a.DataHora,
+                    Id = a.IdBarbeiro,
                     ClienteNome = a.Cliente.Nome,
                     ServicoNome = a.Servico.Nome,
                     Status = a.Status

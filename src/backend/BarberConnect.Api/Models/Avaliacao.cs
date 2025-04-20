@@ -10,7 +10,7 @@ namespace BarberConnect.Api.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdAvaliacao { get; set; }
 
-        public int? Nota { get; set; }
+        public int Nota { get; set; }
 
         public string? Comentario { get; set; }
 
