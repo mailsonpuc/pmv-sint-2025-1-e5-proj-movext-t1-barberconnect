@@ -1,9 +1,11 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using BarberConnect.Api.Context;
 using BarberConnect.Api.Models;
-using BarberConnect.Api.Repository.Interfaces;
+using BarberConnect.Api.Comunication;
 
 namespace BarberConnect.Api.Controllers
 {
@@ -11,96 +13,96 @@ namespace BarberConnect.Api.Controllers
     [ApiController]
     public class AgendamentosController : ControllerBase
     {
-        private readonly IRepository<Agendamento> _repository;
+        private readonly AppDbContext _context;
 
-        public AgendamentosController(IRepository<Agendamento> repository)
+        public AgendamentosController(AppDbContext context)
         {
-            _repository = repository;
+            _context = context;
         }
 
-        // GET: api/Agendamentos
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Agendamento>>> GetAgendamentos()
-        {
-            var agendamentos = await _repository.GetAllAsync();
-            return Ok(agendamentos);
-        }
-
-        // GET: api/Agendamentos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Agendamento>> GetAgendamento(int id)
+        public async Task<ActionResult<AgendamentoResponse>> GetAgendamento(int id)
         {
-            var agendamento = await _repository.GetAsync(a => a.IdAgendamento == id);
+            var agendamento = await _context.Agendamentos
+                .Include(a => a.Cliente)
+                .Include(a => a.Servico)
+                .Include(a => a.HorarioDisponivel)
+                .Include(a => a.Barbeiro)
+                .FirstOrDefaultAsync(a => a.IdAgendamento == id);
 
             if (agendamento == null)
-            {
                 return NotFound("Agendamento não encontrado");
-            }
 
-            return agendamento;
+            return Ok(new AgendamentoResponse(agendamento));
         }
 
-        // PUT: api/Agendamentos/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAgendamento(int id, Agendamento agendamento)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AgendamentoResponse>>> GetAgendamentos()
         {
-            if (id != agendamento.IdAgendamento)
-            {
-                return BadRequest("ID do agendamento não corresponde");
-            }
+            var agendamentos = await _context.Agendamentos
+                .Include(a => a.Cliente)
+                .Include(a => a.Servico)
+                .Include(a => a.HorarioDisponivel)
+                .Include(a => a.Barbeiro)
+                .ToListAsync();
 
-            try
-            {
-                await _repository.UpdateAsync(agendamento);
-                return NoContent();
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Ocorreu um erro ao atualizar o agendamento");
-            }
+            return Ok(agendamentos.Select(a => new AgendamentoResponse(a)));
         }
 
-        // POST: api/Agendamentos
         [HttpPost]
-        public async Task<ActionResult<Agendamento>> PostAgendamento(Agendamento agendamento)
+        public async Task<ActionResult<AgendamentoResponse>> PostAgendamento([FromBody] AgendamentoRequest request)
         {
-            if (agendamento == null)
-            {
-                return BadRequest("Dados do agendamento inválidos");
-            }
+            if (request == null)
+                return BadRequest("Dados inválidos");
 
-            try
+            var agendamento = new Agendamento
             {
-                var agendamentoCriado = await _repository.CreateAsync(agendamento);
-                return CreatedAtAction(nameof(GetAgendamento), 
-                    new { id = agendamentoCriado.IdAgendamento }, 
-                    agendamentoCriado);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Ocorreu um erro ao criar o agendamento");
-            }
+                Status = request.Status,
+                LembreteEnviado = false,
+                IdCliente = request.IdCliente,
+                IdServico = request.IdServico,
+                IdHorario = request.IdHorario,
+                IdBarbeiro = request.IdBarbeiro
+            };
+
+            _context.Agendamentos.Add(agendamento);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetAgendamento), new { id = agendamento.IdAgendamento }, new AgendamentoResponse(agendamento));
         }
 
-        // DELETE: api/Agendamentos/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAgendamento(int id, [FromBody] AgendamentoRequest request)
+        {
+            var agendamento = await _context.Agendamentos.FindAsync(id);
+
+            if (agendamento == null)
+                return NotFound("Agendamento não encontrado");
+
+            agendamento.Status = request.Status;
+            agendamento.IdCliente = request.IdCliente;
+            agendamento.IdServico = request.IdServico;
+            agendamento.IdHorario = request.IdHorario;
+            agendamento.IdBarbeiro = request.IdBarbeiro;
+
+            _context.Entry(agendamento).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAgendamento(int id)
         {
-            var agendamento = await _repository.GetAsync(a => a.IdAgendamento == id);
-            if (agendamento == null)
-            {
-                return NotFound("Agendamento não encontrado");
-            }
+            var agendamento = await _context.Agendamentos.FindAsync(id);
 
-            try
-            {
-                await _repository.DeleteAsync(agendamento);
-                return NoContent();
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Ocorreu um erro ao excluir o agendamento");
-            }
+            if (agendamento == null)
+                return NotFound("Agendamento não encontrado");
+
+            _context.Agendamentos.Remove(agendamento);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
