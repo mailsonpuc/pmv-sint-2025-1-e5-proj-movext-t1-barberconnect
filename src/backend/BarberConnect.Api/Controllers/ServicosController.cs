@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using BarberConnect.Api.Context;
 using BarberConnect.Api.Models;
-using BarberConnect.Api.Repository.Interfaces;
+using BarberConnect.Api.Comunication;
 
 namespace BarberConnect.Api.Controllers
 {
@@ -10,96 +13,102 @@ namespace BarberConnect.Api.Controllers
     [ApiController]
     public class ServicosController : ControllerBase
     {
-        private readonly IRepository<Servico> _repository;
+        private readonly AppDbContext _context;
 
-        public ServicosController(IRepository<Servico> repository)
+        public ServicosController(AppDbContext context)
         {
-            _repository = repository;
+            _context = context;
         }
 
         // GET: api/Servicos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Servico>>> GetServicos()
+        public async Task<ActionResult<IEnumerable<ServicoResponse>>> GetServicos()
         {
-            var servicos = await _repository.GetAllAsync();
-            return Ok(servicos);
+            var servicos = await _context.Servicos
+                .Include(s => s.Barbeiro)
+                .ToListAsync();
+
+            return Ok(servicos.Select(s => new ServicoResponse(s)));
         }
 
         // GET: api/Servicos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Servico>> GetServico(int id)
+        public async Task<ActionResult<ServicoResponse>> GetServico(int id)
         {
-            var servico = await _repository.GetAsync(s => s.Id == id);
+            var servico = await _context.Servicos
+                .Include(s => s.Barbeiro)
+                .FirstOrDefaultAsync(s => s.Id == id);
 
             if (servico == null)
             {
                 return NotFound("Serviço não encontrado");
             }
 
-            return servico;
-        }
-
-        // PUT: api/Servicos/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutServico(int id, Servico servico)
-        {
-            if (id != servico.Id)
-            {
-                return BadRequest("ID do serviço não corresponde");
-            }
-
-            try
-            {
-                await _repository.UpdateAsync(servico);
-                return NoContent();
-            }
-            catch
-            {
-                return StatusCode(500, "Ocorreu um erro ao atualizar o serviço");
-            }
+            return Ok(new ServicoResponse(servico));
         }
 
         // POST: api/Servicos
         [HttpPost]
-        public async Task<ActionResult<Servico>> PostServico(Servico servico)
+        public async Task<ActionResult<ServicoResponse>> PostServico([FromBody] ServicoRequest request)
         {
-            if (servico == null)
+            if (request == null)
             {
                 return BadRequest("Dados do serviço inválidos");
             }
 
-            try
+            var servico = new Servico
             {
-                var servicoCriado = await _repository.CreateAsync(servico);
-                return CreatedAtAction(nameof(GetServico), 
-                    new { id = servicoCriado.Id }, 
-                    servicoCriado);
-            }
-            catch
+                Nome = request.Nome,
+                Descricao = request.Descricao,
+                Preco = request.Preco,
+                Duracao = request.Duracao,
+                BarbeiroId = request.BarbeiroId
+            };
+
+            _context.Servicos.Add(servico);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetServico), new { id = servico.Id }, new ServicoResponse(servico));
+        }
+
+        // PUT: api/Servicos/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutServico(int id, [FromBody] ServicoRequest request)
+        {
+            var servico = await _context.Servicos.FindAsync(id);
+
+            if (servico == null)
             {
-                return StatusCode(500, "Ocorreu um erro ao criar o serviço");
+                return NotFound("Serviço não encontrado");
             }
+
+            servico.Nome = request.Nome;
+            servico.Descricao = request.Descricao;
+            servico.Preco = request.Preco;
+            servico.Duracao = request.Duracao;
+            servico.BarbeiroId = request.BarbeiroId;
+
+            _context.Entry(servico).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
         // DELETE: api/Servicos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteServico(int id)
         {
-            var servico = await _repository.GetAsync(s => s.Id == id);
+            var servico = await _context.Servicos.FindAsync(id);
+
             if (servico == null)
             {
                 return NotFound("Serviço não encontrado");
             }
 
-            try
-            {
-                await _repository.DeleteAsync(servico);
-                return NoContent();
-            }
-            catch
-            {
-                return StatusCode(500, "Ocorreu um erro ao excluir o serviço");
-            }
+            _context.Servicos.Remove(servico);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
