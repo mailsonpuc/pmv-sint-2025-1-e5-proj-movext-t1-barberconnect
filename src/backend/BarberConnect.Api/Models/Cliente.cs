@@ -2,6 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace BarberConnect.Api.Models
 {
@@ -22,8 +23,12 @@ namespace BarberConnect.Api.Models
 
         public int UsuarioId { get; set; }
 
+
+        [JsonIgnore]
         public Usuario Usuario { get; set; }
 
+
+        [JsonIgnore]
         public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
     }
 }
