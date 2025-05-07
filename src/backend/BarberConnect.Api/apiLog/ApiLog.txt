@@ -1,0 +1,140 @@
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/Dev/BarberConnect.Api
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (87ms) [Parameters=[@__normalizedUserName_0='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."RefreshToken", "a"."RefreshTokenExpiryTime", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."RefreshToken", "a"."RefreshTokenExpiryTime", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (65ms) [Parameters=[@p0='?' (Size = 36), @p1='?' (DbType = Int32), @p2='?' (Size = 36), @p3='?' (Size = 15), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 15), @p8='?' (Size = 5), @p9='?' (Size = 84), @p10='?', @p11='?' (DbType = Boolean), @p12='?', @p13='?' (DbType = DateTime), @p14='?' (Size = 32), @p15='?' (DbType = Boolean), @p16='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."RefreshToken", "a"."RefreshTokenExpiryTime", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (18ms) [Parameters=[@__userId_0='?' (Size = 36)], CommandType='Text', CommandTimeout='30']
+SELECT "a0"."Name"
+FROM "AspNetUserRoles" AS "a"
+INNER JOIN "AspNetRoles" AS "a0" ON "a"."RoleId" = "a0"."Id"
+WHERE "a"."UserId" = @__userId_0
+Information: 20101 - Executed DbCommand (0ms) [Parameters=[@__normalizedUserName_0='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."RefreshToken", "a"."RefreshTokenExpiryTime", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (5ms) [Parameters=[@p16='?' (Size = 36), @p0='?' (DbType = Int32), @p1='?' (Size = 36), @p17='?' (Size = 36), @p2='?' (Size = 15), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTimeOffset), @p6='?' (Size = 15), @p7='?' (Size = 5), @p8='?' (Size = 84), @p9='?', @p10='?' (DbType = Boolean), @p11='?' (Size = 172), @p12='?' (DbType = DateTime), @p13='?' (Size = 32), @p14='?' (DbType = Boolean), @p15='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p0, "ConcurrencyStamp" = @p1, "Email" = @p2, "EmailConfirmed" = @p3, "LockoutEnabled" = @p4, "LockoutEnd" = @p5, "NormalizedEmail" = @p6, "NormalizedUserName" = @p7, "PasswordHash" = @p8, "PhoneNumber" = @p9, "PhoneNumberConfirmed" = @p10, "RefreshToken" = @p11, "RefreshTokenExpiryTime" = @p12, "SecurityStamp" = @p13, "TwoFactorEnabled" = @p14, "UserName" = @p15
+WHERE "Id" = @p16 AND "ConcurrencyStamp" = @p17
+RETURNING 1;
+Information: 20101 - Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 18), @p1='?' (Size = 8), @p2='?' (Size = 12), @p3='?' (Size = 15)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Barbeiros" ("Email", "Nome", "Senha", "Telefone")
+VALUES (@p0, @p1, @p2, @p3)
+RETURNING "BarbeiroId";
+Information: 0 - ID do barbeiro criado: 1
+Information: 20101 - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "b"."BarbeiroId", "b"."Email", "b"."Nome", "b"."Senha", "b"."Telefone"
+FROM "Barbeiros" AS "b"
+Information: 20101 - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "c"."ClienteId", "c"."Data_Nascimento", "c"."Email", "c"."Nome", "c"."Senha", "c"."Telefone"
+FROM "Clientes" AS "c"
+Information: 20101 - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "s"."ServicoId", "s"."Descricao", "s"."Nome"
+FROM "Servicos" AS "s"
+Information: 20101 - Executed DbCommand (28ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?' (DbType = Boolean), @p3='?' (DbType = Time), @p4='?' (DbType = Time)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "HorarioDisponiveis" ("BarbeiroId", "Date", "Disponivel", "HoraFim", "HoraInicio")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "HorarioDisponivelId";
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "h"."HorarioDisponivelId", "h"."BarbeiroId", "h"."Date", "h"."Disponivel", "h"."HoraFim", "h"."HoraInicio"
+FROM "HorarioDisponiveis" AS "h"
+Information: 20101 - Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Boolean), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Agendamentos" ("BarbeiroId", "ClienteId", "HorarioId", "LembreteEnviado", "ServicoId", "Status")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING "AgendamentoId";
+Information: 20101 - Executed DbCommand (27ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (Size = 9), @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+INSERT INTO "Avaliacoes" ("AgendamentoId", "BarbeiroId", "ClienteId", "Comentario", "Data", "Nota")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING "AvaliacaoId";
+Information: 20101 - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "a"."AvaliacaoId", "a"."AgendamentoId", "a"."BarbeiroId", "a"."ClienteId", "a"."Comentario", "a"."Data", "a"."Nota"
+FROM "Avaliacoes" AS "a"
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/Dev/BarberConnect.Api
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (51ms) [Parameters=[@__normalizedUserName_0='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."RefreshToken", "a"."RefreshTokenExpiryTime", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (Size = 36)], CommandType='Text', CommandTimeout='30']
+SELECT "a0"."Name"
+FROM "AspNetUserRoles" AS "a"
+INNER JOIN "AspNetRoles" AS "a0" ON "a"."RoleId" = "a0"."Id"
+WHERE "a"."UserId" = @__userId_0
+Information: 20101 - Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."RefreshToken", "a"."RefreshTokenExpiryTime", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (9ms) [Parameters=[@p16='?' (Size = 36), @p0='?' (DbType = Int32), @p1='?' (Size = 36), @p17='?' (Size = 36), @p2='?' (Size = 15), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTimeOffset), @p6='?' (Size = 15), @p7='?' (Size = 5), @p8='?' (Size = 84), @p9='?', @p10='?' (DbType = Boolean), @p11='?' (Size = 172), @p12='?' (DbType = DateTime), @p13='?' (Size = 32), @p14='?' (DbType = Boolean), @p15='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p0, "ConcurrencyStamp" = @p1, "Email" = @p2, "EmailConfirmed" = @p3, "LockoutEnabled" = @p4, "LockoutEnd" = @p5, "NormalizedEmail" = @p6, "NormalizedUserName" = @p7, "PasswordHash" = @p8, "PhoneNumber" = @p9, "PhoneNumberConfirmed" = @p10, "RefreshToken" = @p11, "RefreshTokenExpiryTime" = @p12, "SecurityStamp" = @p13, "TwoFactorEnabled" = @p14, "UserName" = @p15
+WHERE "Id" = @p16 AND "ConcurrencyStamp" = @p17
+RETURNING 1;
+Information: 20101 - Executed DbCommand (0ms) [Parameters=[@__normalizedUserName_0='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."RefreshToken", "a"."RefreshTokenExpiryTime", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (0ms) [Parameters=[@__normalizedUserName_0='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."RefreshToken", "a"."RefreshTokenExpiryTime", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+Information: 20101 - Executed DbCommand (0ms) [Parameters=[@p16='?' (Size = 36), @p0='?' (DbType = Int32), @p1='?' (Size = 36), @p17='?' (Size = 36), @p2='?' (Size = 15), @p3='?' (DbType = Boolean), @p4='?' (DbType = Boolean), @p5='?' (DbType = DateTimeOffset), @p6='?' (Size = 15), @p7='?' (Size = 5), @p8='?' (Size = 84), @p9='?', @p10='?' (DbType = Boolean), @p11='?' (Size = 172), @p12='?' (DbType = DateTime), @p13='?' (Size = 32), @p14='?' (DbType = Boolean), @p15='?' (Size = 5)], CommandType='Text', CommandTimeout='30']
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p0, "ConcurrencyStamp" = @p1, "Email" = @p2, "EmailConfirmed" = @p3, "LockoutEnabled" = @p4, "LockoutEnd" = @p5, "NormalizedEmail" = @p6, "NormalizedUserName" = @p7, "PasswordHash" = @p8, "PhoneNumber" = @p9, "PhoneNumberConfirmed" = @p10, "RefreshToken" = @p11, "RefreshTokenExpiryTime" = @p12, "SecurityStamp" = @p13, "TwoFactorEnabled" = @p14, "UserName" = @p15
+WHERE "Id" = @p16 AND "ConcurrencyStamp" = @p17
+RETURNING 1;
+Information: 20101 - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "b"."BarbeiroId", "b"."Email", "b"."Nome", "b"."Senha", "b"."Telefone"
+FROM "Barbeiros" AS "b"
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/Dev/BarberConnect.Api
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (264ms) [Parameters=[@__normalizedUserName_0='?' (Size = 6)], CommandType='Text', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."RefreshToken", "a"."RefreshTokenExpiryTime", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/Dev/BarberConnect.Api
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/Dev/BarberConnect.Api
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Information: 0 - Application is shutting down...
