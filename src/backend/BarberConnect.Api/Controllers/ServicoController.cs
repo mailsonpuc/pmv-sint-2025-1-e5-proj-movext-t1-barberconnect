@@ -34,6 +34,9 @@ namespace BarberConnect.Api.Controllers
 
 
 
+        /// <summary>
+        /// Lista Paginada  de servicos.
+        /// </summary>
         [AllowAnonymous]
         [HttpGet("pagination")]
         public async Task<ActionResult<IEnumerable<ServicoDTO>>> Get([FromQuery]
@@ -44,6 +47,11 @@ namespace BarberConnect.Api.Controllers
             return ObterServicos(servicos);
         }
 
+
+
+        /// <summary>
+        /// Lista Paginada de servicos por nome.
+        /// </summary>
 
         [AllowAnonymous]
         [HttpGet("filter/nome/pagination")]
@@ -80,7 +88,10 @@ namespace BarberConnect.Api.Controllers
 
 
 
-
+        /// <summary>
+        /// Obtém todos os Servicos, Sem Authorize.
+        /// </summary>
+        /// <returns>Lista de servicos</returns>
         [AllowAnonymous]
         [HttpGet("Servicos")]
         public async Task<ActionResult<IEnumerable<ServicoDTO>>> Get()
@@ -102,8 +113,9 @@ namespace BarberConnect.Api.Controllers
 
 
 
-
-
+        /// <summary>
+        /// Obtém um servico por id.
+        /// </summary>
         [Authorize]
         [HttpGet("{id:int}", Name = "ObterServico")]
         public async Task<ActionResult<ServicoDTO>> Get(int id)
@@ -123,7 +135,9 @@ namespace BarberConnect.Api.Controllers
 
 
 
-
+        /// <summary>
+        /// Criar um servico .
+        /// </summary>
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<ServicoDTO>> Post(ServicoDTO servicoDto)
@@ -149,7 +163,9 @@ namespace BarberConnect.Api.Controllers
 
 
 
-
+        /// <summary>
+        /// Alterar dados de um servico.
+        /// </summary>
         [HttpPut("{id:int}")]
         [AllowAnonymous]
         public async Task<ActionResult<ServicoDTO>> Put(int id, ServicoDTO servicoDto)
@@ -172,6 +188,9 @@ namespace BarberConnect.Api.Controllers
 
 
 
+        /// <summary>
+        /// Delete um servico por id.
+        /// </summary>
         [AllowAnonymous]
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<ServicoDTO>> Delete(int id)

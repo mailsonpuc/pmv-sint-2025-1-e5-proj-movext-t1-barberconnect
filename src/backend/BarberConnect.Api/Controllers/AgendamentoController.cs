@@ -27,9 +27,10 @@ namespace BarberConnect.Api.Controllers
 
 
 
-
-
-
+        /// <summary>
+        /// Obtém todos os agendamentos.
+        /// </summary>
+        /// <returns>Lista de agendamentos</returns>
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AgendamentoDTO>>> Get()

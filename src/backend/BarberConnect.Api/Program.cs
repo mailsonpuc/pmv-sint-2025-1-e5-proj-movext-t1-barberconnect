@@ -16,8 +16,6 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 // Add services to the container.
 builder.Services.AddControllers(options =>
 {
@@ -29,29 +27,9 @@ builder.Services.AddControllers(options =>
 })
 .AddNewtonsoftJson();
 
-
-
-
-
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-
-
-// Configure CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAllOrigins", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
-});
-
-
-
-//swager configurado para mostrar o cadeado
+// ✅ Configuração completa do Swagger, incluindo comentários XML
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "api do projeto Barbearia puc", Version = "v1" });
@@ -65,40 +43,51 @@ builder.Services.AddSwaggerGen(c =>
         In = ParameterLocation.Header,
         Description = "Bearer JWT ",
     });
+
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
                 {
-                    {
-                          new OpenApiSecurityScheme
-                          {
-                              Reference = new OpenApiReference
-                              {
-                                  Type = ReferenceType.SecurityScheme,
-                                  Id = "Bearer"
-                              }
-                          },
-                         new string[] {}
-                    }
-                });
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+
+    //  Inclui comentários XML (Swagger mostra os <summary> dos endpoints)
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
 });
 
+// Configuração de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
-
-//aplicando o indentity
+// Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-.AddEntityFrameworkStores<AppDbContext>()
-.AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
 
-
-
-
+// DB Context
 builder.Services.AddDbContext<AppDbContext>(options =>
-       options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
-//jwt aqui
+// JWT
 var secretKey = builder.Configuration["JWT:SecretKey"]
                    ?? throw new ArgumentException("Invalid secret key!!");
-
 
 builder.Services.AddAuthentication(options =>
 {
@@ -118,15 +107,12 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["JWT:ValidAudience"],
         ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
         IssuerSigningKey = new SymmetricSecurityKey(
-                           Encoding.UTF8.GetBytes(secretKey))
+            Encoding.UTF8.GetBytes(secretKey))
     };
 });
 
-
-
-
+// Serviços e Repositórios
 builder.Services.AddScoped<ApiLoggingFilter>();
-//repo de todas as entity
 builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
 builder.Services.AddScoped<IAvaliacaoRepository, AvaliacaoRepository>();
 builder.Services.AddScoped<IBarbeiroRepository, BarbeiroRepository>();
@@ -134,50 +120,30 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IHistoricoCorteRepository, HistoricoCorteRepository>();
 builder.Services.AddScoped<IHorarioDisponivelRepository, HorarioDisponivelRepository>();
 builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
-
-// //token jwt
 builder.Services.AddScoped<ITokenService, TokenService>();
-
-//usando repository Generico
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-//usando Unit Of work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
-
-
-//log
+// Logging
 builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
 {
     LogLevel = LogLevel.Information
 }));
 
-
-
-
-
 var app = builder.Build();
 
-
-
-// Configura o pipeline HTTP
+// Pipeline HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(opt =>
     {
         opt.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        opt.RoutePrefix = string.Empty; // Swagger UI na raiz do app
+        opt.RoutePrefix = string.Empty; // Swagger UI na raiz
     });
 }
 
-// APLICA AQUI a política de CORS
 app.UseCors("AllowAllOrigins");
-
-
-
-
-
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -17,7 +17,6 @@ namespace BarberConnect.Api.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-
         private readonly ITokenService _tokenService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -33,13 +32,9 @@ namespace BarberConnect.Api.Controllers
             _logger = logger;
         }
 
-
-
-
-
-
-
-
+        /// <summary>
+        /// Realiza o login do usuário e retorna um token JWT e refresh token.
+        /// </summary>
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -51,28 +46,23 @@ namespace BarberConnect.Api.Controllers
                 var userRoles = await _userManager.GetRolesAsync(user);
 
                 var authClaims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.UserName!),
-                new Claim(ClaimTypes.Email, user.Email!),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            };
+                {
+                    new Claim(ClaimTypes.Name, user.UserName!),
+                    new Claim(ClaimTypes.Email, user.Email!),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
 
                 foreach (var userRole in userRoles)
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
-                var token = _tokenService.GenerateAccessToken(authClaims,
-                                                             _configuration);
-
+                var token = _tokenService.GenerateAccessToken(authClaims, _configuration);
                 var refreshToken = _tokenService.GenerateRefreshToken();
 
-                _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInMinutes"],
-                                   out int refreshTokenValidityInMinutes);
+                _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInMinutes"], out int refreshTokenValidityInMinutes);
 
-                user.RefreshTokenExpiryTime =
-                                DateTime.Now.AddMinutes(refreshTokenValidityInMinutes);
-
+                user.RefreshTokenExpiryTime = DateTime.Now.AddMinutes(refreshTokenValidityInMinutes);
                 user.RefreshToken = refreshToken;
 
                 await _userManager.UpdateAsync(user);
@@ -87,14 +77,9 @@ namespace BarberConnect.Api.Controllers
             return Unauthorized();
         }
 
-
-
-
-
-
-
-
-
+        /// <summary>
+        /// Registra um novo usuário e retorna confirmação de sucesso.
+        /// </summary>
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
@@ -104,7 +89,7 @@ namespace BarberConnect.Api.Controllers
             if (userExists != null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                       new Response { Status = "Error", Message = "User already exists!" });
+                    new Response { Status = "Error", Message = "User already exists!" });
             }
 
             ApplicationUser user = new()
@@ -119,61 +104,40 @@ namespace BarberConnect.Api.Controllers
             if (!result.Succeeded)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                       new Response { Status = "Error", Message = "User creation failed." });
+                    new Response { Status = "Error", Message = "User creation failed." });
             }
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
-
         }
 
-
-
-
-
-
-
-
-
+        /// <summary>
+        /// Gera um novo par de tokens (access e refresh) usando um refresh token válido.
+        /// </summary>
         [HttpPost]
         [Route("refresh-token")]
         public async Task<IActionResult> RefreshToken(TokenModel tokenModel)
         {
-
             if (tokenModel is null)
-            {
                 return BadRequest("Invalid client request");
-            }
 
-            string? accessToken = tokenModel.AccessToken
-                                  ?? throw new ArgumentNullException(nameof(tokenModel));
-
-            string? refreshToken = tokenModel.RefreshToken
-                                   ?? throw new ArgumentException(nameof(tokenModel));
+            string? accessToken = tokenModel.AccessToken ?? throw new ArgumentNullException(nameof(tokenModel));
+            string? refreshToken = tokenModel.RefreshToken ?? throw new ArgumentException(nameof(tokenModel));
 
             var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken!, _configuration);
 
             if (principal == null)
-            {
                 return BadRequest("Invalid access token/refresh token");
-            }
 
             string username = principal.Identity.Name;
-
             var user = await _userManager.FindByNameAsync(username!);
 
-            if (user == null || user.RefreshToken != refreshToken
-                             || user.RefreshTokenExpiryTime <= DateTime.Now)
-            {
+            if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
                 return BadRequest("Invalid access token/refresh token");
-            }
 
-            var newAccessToken = _tokenService.GenerateAccessToken(
-                                               principal.Claims.ToList(), _configuration);
-
+            var newAccessToken = _tokenService.GenerateAccessToken(principal.Claims.ToList(), _configuration);
             var newRefreshToken = _tokenService.GenerateRefreshToken();
 
             user.RefreshToken = newRefreshToken;
-
             await _userManager.UpdateAsync(user);
 
             return new ObjectResult(new
@@ -183,18 +147,9 @@ namespace BarberConnect.Api.Controllers
             });
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        /// <summary>
+        /// Revoga o refresh token de um usuário específico.
+        /// </summary>
         [Authorize]
         [HttpPost]
         [Route("revoke/{username}")]
@@ -205,16 +160,9 @@ namespace BarberConnect.Api.Controllers
             if (user == null) return BadRequest("Invalid user name");
 
             user.RefreshToken = null;
-
             await _userManager.UpdateAsync(user);
 
             return NoContent();
         }
-
-
-
-
-
-
     }
 }

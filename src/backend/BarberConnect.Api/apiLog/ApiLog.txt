@@ -138,3 +138,43 @@ Information: 0 - Application started. Press Ctrl+C to shut down.
 Information: 0 - Hosting environment: Development
 Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
 Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Warning: 3 - Failed to determine the https port for redirect.
+Information: 20101 - Executed DbCommand (45ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "s"."ServicoId", "s"."Descricao", "s"."Nome"
+FROM "Servicos" AS "s"
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Information: 0 - Application is shutting down...
