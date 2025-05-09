@@ -37,7 +37,7 @@ E digite.
 ```bash
 dotnet run
 ```
-Executar os testes unitários entre na pasta BarberConnect.Api.
+Executar os testes unitários entre na pasta BarberConnect.Api.Test
 e digite.
 ```bash
 dotnet test
