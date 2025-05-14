@@ -32,6 +32,81 @@ namespace BarberConnect.Api.Controllers
             _logger = logger;
         }
 
+
+
+
+
+
+        /// <summary>
+        /// Criar regrar - role.
+        /// </summary>
+        [HttpPost]
+        [Route("CreateRole")]
+        public async Task<IActionResult> CreateRole(string roleName)
+        {
+            //indo na tabela
+            var roleExist = await _roleManager.RoleExistsAsync(roleName);
+            if (!roleExist)
+            {
+                var roleResult = await _roleManager.CreateAsync(new IdentityRole(roleName));
+                if (roleResult.Succeeded)
+                {
+                    _logger.LogInformation(1, "Roles Addded");
+                    return StatusCode(StatusCodes.Status200OK,
+                    new Response { Status = "Success", Message = $"Role {roleName} added successfully" });
+                }
+
+                else
+                {
+                    _logger.LogInformation(2, "Error");
+                    return StatusCode(StatusCodes.Status400BadRequest,
+                   new Response { Status = "Error", Message = $"issue adding the new {roleName} role" });
+                }
+            }
+            _logger.LogInformation("Role ja existem");
+            return StatusCode(StatusCodes.Status400BadRequest,
+           new Response { Status = "Error", Message = $"Role already exist" });
+
+        }
+
+
+
+
+
+        /// <summary>
+        /// Adicionar usuario a uma  regrar - role.
+        /// </summary>
+        [HttpPost]
+        [Route("AddUserToRole")]
+        public async Task<IActionResult> AddUserToRole(string email, string roleName)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                var result = await _userManager.AddToRoleAsync(user, roleName);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation(1, $"User {user.Email} added to the {roleName} role");
+                    return StatusCode(StatusCodes.Status200OK,
+                    new Response { Status = "Sucess", Message = $"User {user.Email} added to te {roleName} role" });
+                }
+                else
+                {
+
+                    _logger.LogInformation(1, $"Error: Unable to add user  {user.Email}  to the {roleName} role");
+                    return StatusCode(StatusCodes.Status400BadRequest,
+                  new Response { Status = "Sucess", Message = $"User {user.Email} added to te {roleName} role" });
+                }
+            }
+            return BadRequest(new { error = "Unable to find user "});
+        }
+
+
+
+
+
+
+
         /// <summary>
         /// Realiza o login do usuário e retorna um token JWT e refresh token.
         /// </summary>
