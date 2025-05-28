@@ -284,3 +284,13 @@ WHERE "Id" = @p16 AND "ConcurrencyStamp" = @p17
 RETURNING 1;
 Information: 1 - User puc@minas.com added to the Admin role
 Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Information: 0 - Application is shutting down...
+Information: 14 - Now listening on: http://localhost:5109
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: /home/euSSD/pmv-sint-2025-1-e5-proj-movext-t1-barberconnect/src/backend/BarberConnect.Api
+Information: 0 - Application is shutting down...

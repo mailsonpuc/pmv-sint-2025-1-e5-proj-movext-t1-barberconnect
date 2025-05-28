@@ -14,6 +14,7 @@ using X.PagedList;
 
 namespace BarberConnect.Api.Controllers
 {
+    [ApiConventionType(typeof(DefaultApiConventions))] //documenta todos os retorno statusCode do controller
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]

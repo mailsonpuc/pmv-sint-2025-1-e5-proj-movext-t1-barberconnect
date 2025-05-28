@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BarberConnect.Api.Controllers
 {
+    [ApiConventionType(typeof(DefaultApiConventions))] //documenta todos os retorno statusCode do controller
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
