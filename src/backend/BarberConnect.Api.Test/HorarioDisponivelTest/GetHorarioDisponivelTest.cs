@@ -108,5 +108,51 @@ namespace BarberConnect.Api.Test.HorarioDisponivelTest
 
 
 
+
+
+
+
+
+        [Fact]
+        public async Task GetHorarioDisponivel_Return_ListOfHorariosDisponivelDTO()
+        {
+            // Arrange
+            var horarios = new List<HorarioDisponivel>
+
+        {
+        new HorarioDisponivel {
+                HorarioDisponivelId = 1,
+                Date = DateTime.Today,
+                HoraInicio = TimeSpan.FromHours(9),
+                HoraFim = TimeSpan.FromHours(10),
+                Disponivel = true },
+
+          new HorarioDisponivel {
+                HorarioDisponivelId = 2,
+                Date = DateTime.Today,
+                HoraInicio = TimeSpan.FromHours(10),
+                HoraFim = TimeSpan.FromHours(9),
+                Disponivel = true },
+        };
+
+            _mockUof.Setup(repo => repo.HorarioDisponivelRepository.GetAllAsync())
+                    .ReturnsAsync(horarios);
+
+
+            // Act
+            var result = await _controller.Get();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            var returnValue = Assert.IsAssignableFrom<IEnumerable<HorarioDisponivelDTO>>(okResult.Value);
+            Assert.Equal(2, returnValue.Count());
+        }
+
+
+
+
+
+
+
     }
 }
