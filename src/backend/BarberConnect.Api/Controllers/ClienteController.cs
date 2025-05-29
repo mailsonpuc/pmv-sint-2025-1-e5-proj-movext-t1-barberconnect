@@ -56,6 +56,11 @@ namespace BarberConnect.Api.Controllers
         [HttpGet("{id:int}", Name = "ObterCliente")]
         public async Task<ActionResult<ClienteDTO>> Get(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("ID inválido.");
+            }
+            
             var cliente = await _uof.ClienteRepository.GetAsync(c => c.ClienteId == id);
 
             if (cliente is null)

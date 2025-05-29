@@ -51,6 +51,11 @@ namespace BarberConnect.Api.Controllers
         [HttpGet("{id:int}", Name = "ObterAvaliacao")]
         public async Task<ActionResult<AvaliacaoDTO>> Get(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("ID inválido.");
+            }
+
             var avaliacao = await _uof.AvaliacaoRepository.GetAsync(c => c.AvaliacaoId == id);
 
             if (avaliacao is null)

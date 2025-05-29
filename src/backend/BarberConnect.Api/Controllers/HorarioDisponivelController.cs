@@ -56,6 +56,11 @@ namespace BarberConnect.Api.Controllers
         [HttpGet("{id:int}", Name = "ObterHorarioDisponivel")]
         public async Task<ActionResult<HorarioDisponivelDTO>> Get(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("ID inválido.");
+            }
+
             var horarioDisponivel = await _uof.HorarioDisponivelRepository.GetAsync(c => c.HorarioDisponivelId == id);
 
             if (horarioDisponivel is null)

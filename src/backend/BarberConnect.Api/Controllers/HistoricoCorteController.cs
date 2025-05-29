@@ -59,6 +59,11 @@ namespace BarberConnect.Api.Controllers
         [HttpGet("{id:int}", Name = "ObterHistorioCorte")]
         public async Task<ActionResult<HistoricoCorteDTO>> Get(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("ID inválido.");
+            }
+
             var historicoCorte = await _uof.HistoricoCorteRepository.GetAsync(c => c.HistoricoCorteId == id);
 
             if (historicoCorte is null)

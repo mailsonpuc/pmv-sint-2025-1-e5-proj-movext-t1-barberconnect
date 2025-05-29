@@ -62,6 +62,12 @@ namespace BarberConnect.Api.Controllers
         [HttpGet("{id:int}", Name = "ObterAgendamento")]
         public async Task<ActionResult<AgendamentoDTO>> Get(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("ID inválido.");
+            }
+
+
             var agendamento = await _uof.AgendamentoRepository.GetAsync(c => c.AgendamentoId == id);
 
             if (agendamento is null)
