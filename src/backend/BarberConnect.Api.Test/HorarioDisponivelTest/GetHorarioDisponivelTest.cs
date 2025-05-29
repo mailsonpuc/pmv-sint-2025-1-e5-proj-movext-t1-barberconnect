@@ -10,6 +10,7 @@ using Moq;
 using Xunit;
 using System.Linq;
 using System;
+using System.Linq.Expressions;
 
 namespace BarberConnect.Api.Test.HorarioDisponivelTest
 {
@@ -29,47 +30,83 @@ namespace BarberConnect.Api.Test.HorarioDisponivelTest
 
 
         [Fact]
-        public async Task Get_ReturnsOkResult_WithListOfHorarioDisponivelDTO()
+        public async Task GetHorarioDisponivelById_OkResult()
         {
             // Arrange
-            var horarios = new List<HorarioDisponivel>
+            var horarioDisponivelId = 1;
+            var horario = new HorarioDisponivel
             {
-                new HorarioDisponivel { HorarioDisponivelId = 1, Date = DateTime.Today, HoraInicio = TimeSpan.FromHours(9), HoraFim = TimeSpan.FromHours(10), Disponivel = true }
+                HorarioDisponivelId = 1,
+                Date = DateTime.Today,
+                HoraInicio = TimeSpan.FromHours(9),
+                HoraFim = TimeSpan.FromHours(10),
+                Disponivel = true
             };
 
-            _mockUof.Setup(u => u.HorarioDisponivelRepository.GetAllAsync())
-                .ReturnsAsync(horarios);
 
-            // Act
-            var result = await _controller.Get();
+
+            _mockUof.Setup(u => u.HorarioDisponivelRepository.GetAsync(It.IsAny<Expression<Func<HorarioDisponivel, bool>>>()))
+            .ReturnsAsync(horario);
+
+
+            //act
+            var result = await _controller.Get(horarioDisponivelId);
+
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
-            var returnValue = Assert.IsAssignableFrom<IEnumerable<HorarioDisponivelDTO>>(okResult.Value);
-            Assert.Single(returnValue); // Verifica se tem 1 item
+            var returnValue = Assert.IsType<HorarioDisponivelDTO>(okResult.Value);
+            Assert.Equal(horarioDisponivelId, returnValue.HorarioDisponivelId);
+
+
+
+        }
+
+
+
+
+
+        [Fact]
+        public async Task GetHorarioDisponivelById_Return_NotFound()
+        {
+            // Arrange
+            var horarioDisponivelId = 999;
+            _mockUof.Setup(u => u.HorarioDisponivelRepository.GetAsync(It.IsAny<Expression<Func<HorarioDisponivel, bool>>>()))
+                    .ReturnsAsync((HorarioDisponivel)null);
+
+
+
+            // Act
+            var result = await _controller.Get(horarioDisponivelId);
+
+
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result.Result);
+            Assert.Equal($"horarioDisponivel com id= {horarioDisponivelId} não encontrado...", notFoundResult.Value);
         }
 
 
 
 
         [Fact]
-        public async Task Get_ReturnsNotFound_WhenNoHorarioDisponivel()
+        public async Task GetHorarioDisponivelById_Returns_BadRequest()
         {
             // Arrange
-            List<HorarioDisponivel>? nullList = null;
-
-            _mockUof.Setup(u => u.HorarioDisponivelRepository.GetAllAsync())
-                .ReturnsAsync(nullList);
+            var horarioDisponivelId = -1;
 
             // Act
-            var result = await _controller.Get();
+            var result = await _controller.Get(horarioDisponivelId);
 
             // Assert
-            var notFound = Assert.IsType<NotFoundObjectResult>(result.Result);
-            Assert.Equal("Não existem horariosDisponivels ...", notFound.Value);
+            var badRequest = Assert.IsType<BadRequestObjectResult>(result.Result);
+            Assert.Equal("ID inválido.", badRequest.Value);
         }
 
 
-        
+
+
+
+
     }
 }
