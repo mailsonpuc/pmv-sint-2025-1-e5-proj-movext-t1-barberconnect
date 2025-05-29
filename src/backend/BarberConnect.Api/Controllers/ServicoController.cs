@@ -121,6 +121,11 @@ namespace BarberConnect.Api.Controllers
         [HttpGet("{id:int}", Name = "ObterServico")]
         public async Task<ActionResult<ServicoDTO>> Get(int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("ID inválido.");
+            }
+
             var servico = await _uof.ServicoRepository.GetAsync(c => c.ServicoId == id);
 
             if (servico is null)
@@ -130,9 +135,9 @@ namespace BarberConnect.Api.Controllers
             }
 
             var servicoDto = servico.ToServicoDTO();
-
             return Ok(servicoDto);
         }
+
 
 
 
