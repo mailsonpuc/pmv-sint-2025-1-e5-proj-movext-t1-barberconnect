@@ -16,13 +16,34 @@ Enumere quais cenários de testes foram selecionados para teste. Neste tópico o
 <img src="img/servicoTest.png" >
 
 ```
- HorarioDisponivelTest
+HorarioDisponivelTest
+```
+<img src="img/servicoTest.png" >
+
+```
  HistoricoCorteTest
- ClienteTest 
- BarbeiroTest 
+```
+<img src="img/servicoTest.png" >
+
+```
+ ClienteTest
+```
+<img src="img/servicoTest.png" >
+
+```
+ BarbeiroTest
+```
+<img src="img/servicoTest.png" >
+
+```
  AvaliacaoTest
+```
+<img src="img/servicoTest.png" >
+
+```
  AgendamentoTest
 ```
+<img src="img/servicoTest.png" >
 
 # Evidências de Testes de Software
 
@@ -34,3 +55,31 @@ dotnet test --filter "ServicoTest"
 ```
 
 <img src="img/evServicoTest.png" >
+
+```bash
+dotnet test --filter "HorarioDisponivelTest"
+```
+
+
+```bash
+dotnet test --filter "HistoricoCorteTest"
+```
+
+```bash
+dotnet test --filter "ClienteTest"
+```
+
+
+```bash
+dotnet test --filter "BarbeiroTest"
+```
+
+```bash
+dotnet test --filter "AvaliacaoTest"
+```
+
+
+```bash
+dotnet test --filter "AgendamentoTest"
+```
+
