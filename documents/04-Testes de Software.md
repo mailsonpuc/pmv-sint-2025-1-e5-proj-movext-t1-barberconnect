@@ -7,11 +7,15 @@ Enumere quais cenários de testes foram selecionados para teste. Neste tópico o
 # Descrição de Teste Unitário
  Objetivo:
  Verificar se os métodos estão funcionando corretamente.<br>
- Cada diretorio tem seu metodo de teste unitario , testando os metoodos ```GET,POST,PUT,DELETE.```
+ Cada diretorio tem seu metodo de teste unitario , testando os metodos ```GET,POST,PUT,DELETE.```
 
-## diretorios em BarberConnect.Api.Test
+## diretorios dos teste unitarios  em BarberConnect.Api.Test
 ```
  ServicoTest
+```
+<img src="img/servicoTest.png" >
+
+```
  HorarioDisponivelTest
  HistoricoCorteTest
  ClienteTest 
@@ -24,3 +28,9 @@ Enumere quais cenários de testes foram selecionados para teste. Neste tópico o
 
 Apresente imagens e/ou vídeos que comprovam que um determinado teste foi executado, e o resultado esperado foi obtido. Normalmente são screenshots de telas, ou vídeos do software em funcionamento.
 
+comando para testa o ServicoTest
+```bash
+dotnet test --filter "ServicoTest"
+```
+
+<img src="img/evServicoTest.png" >
