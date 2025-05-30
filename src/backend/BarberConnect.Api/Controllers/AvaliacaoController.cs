@@ -16,9 +16,9 @@ namespace BarberConnect.Api.Controllers
     public class AvaliacaoController : ControllerBase
     {
         private readonly IUnitOfWork _uof;
-        private readonly ILogger<BarbeiroController> _logger;
+        private readonly ILogger<AvaliacaoController> _logger;
 
-        public AvaliacaoController(IUnitOfWork uof, ILogger<BarbeiroController> logger)
+        public AvaliacaoController(IUnitOfWork uof, ILogger<AvaliacaoController> logger) //conserto AvaliacaoController
         {
             _uof = uof;
             _logger = logger;
