@@ -64,6 +64,7 @@ namespace BarberConnect.Api.Controllers
                 return BadRequest("ID inválido.");
             }
 
+
             var historicoCorte = await _uof.HistoricoCorteRepository.GetAsync(c => c.HistoricoCorteId == id);
 
             if (historicoCorte is null)
@@ -74,7 +75,7 @@ namespace BarberConnect.Api.Controllers
 
             var historicoCorteDto = historicoCorte.ToHistoricoCortDTO();
 
-            return Ok(historicoCorte);
+            return Ok(historicoCorteDto); //conserto
         }
 
 
