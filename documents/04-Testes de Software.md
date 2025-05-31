@@ -18,7 +18,7 @@ Enumere quais cenários de testes foram selecionados para teste. Neste tópico o
 ```
 HorarioDisponivelTest
 ```
-<img src="img/servicoTest.png" >
+<img src="img/HorarioDisponivelTest.png" >
 
 ```
  HistoricoCorteTest
