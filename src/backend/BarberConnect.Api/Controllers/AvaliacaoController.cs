@@ -141,11 +141,13 @@ namespace BarberConnect.Api.Controllers
             var avaliacaoExcluida = _uof.AvaliacaoRepository.Delete(avaliacao);
             await _uof.Commit();
 
-            var avaliacaooExcluidaDto = avaliacaoExcluida.ToAvaliacaoDTO;
+            var avaliacaooExcluidaDto = avaliacaoExcluida.ToAvaliacaoDTO(); //conserto de parenteses aqui
 
             return Ok(avaliacaooExcluidaDto);
         }
 
+
+    
 
 
 
