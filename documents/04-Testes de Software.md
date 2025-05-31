@@ -28,7 +28,7 @@ HorarioDisponivelTest
 ```
  ClienteTest
 ```
-<img src="img/servicoTest.png" >
+<img src="img/clienteTest.png" >
 
 ```
  BarbeiroTest
