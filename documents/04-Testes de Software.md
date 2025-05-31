@@ -33,7 +33,7 @@ HorarioDisponivelTest
 ```
  BarbeiroTest
 ```
-<img src="img/servicoTest.png" >
+<img src="img/barbeiroTest.png" >
 
 ```
  AvaliacaoTest
@@ -80,6 +80,8 @@ dotnet test --filter "ClienteTest"
 ```bash
 dotnet test --filter "BarbeiroTest"
 ```
+<img src="img/evBarbeiroTest.png" >
+
 
 ```bash
 dotnet test --filter "AvaliacaoTest"
