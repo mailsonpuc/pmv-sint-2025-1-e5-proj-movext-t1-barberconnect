@@ -23,7 +23,7 @@ HorarioDisponivelTest
 ```
  HistoricoCorteTest
 ```
-<img src="img/servicoTest.png" >
+<img src="img/evHistoricoCorte.png" >
 
 ```
  ClienteTest
