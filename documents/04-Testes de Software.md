@@ -74,6 +74,7 @@ dotnet test --filter "HistoricoCorteTest"
 ```bash
 dotnet test --filter "ClienteTest"
 ```
+<img src="img/evClienteTest.png" >
 
 
 ```bash
