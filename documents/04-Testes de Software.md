@@ -60,6 +60,9 @@ dotnet test --filter "ServicoTest"
 dotnet test --filter "HorarioDisponivelTest"
 ```
 
+<img src="img/evHorarioDisponivel.png" >
+
+
 
 ```bash
 dotnet test --filter "HistoricoCorteTest"
