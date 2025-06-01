@@ -43,7 +43,7 @@ HorarioDisponivelTest
 ```
  AgendamentoTest
 ```
-<img src="img/servicoTest.png" >
+<img src="img/agendamentoTest.png" >
 
 # Evidências de Testes de Software
 
@@ -93,4 +93,5 @@ dotnet test --filter "AvaliacaoTest"
 ```bash
 dotnet test --filter "AgendamentoTest"
 ```
+<img src="img/evAgendamentoTest.png" >
 
