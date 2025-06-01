@@ -95,3 +95,7 @@ dotnet test --filter "AgendamentoTest"
 ```
 <img src="img/evAgendamentoTest.png" >
 
+
+
+todos os testes juntos realizados total 70 passarom com sucesso.
+<img src="img/TodosOsTest.png" >
