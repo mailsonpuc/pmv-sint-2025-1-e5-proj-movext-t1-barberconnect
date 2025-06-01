@@ -1,15 +1,35 @@
 # Planos de Testes de Software
 
-Apresente os cenários de testes utilizados na realização dos testes da sua aplicação. Escolha cenários de testes que demonstrem os requisitos sendo satisfeitos.
+Plano de Testes de Software – Projeto Barbearia BarberConnect
+#### Objetivo
+Validar se as funcionalidades principais da aplicação BarberConnect atendem aos requisitos funcionais definidos, garantindo confiabilidade, usabilidade e funcionalidade para os usuários finais (clientes e barbeiros).
 
-Enumere quais cenários de testes foram selecionados para teste. Neste tópico o grupo deve detalhar quais funcionalidades avaliadas, o grupo de usuários que foi escolhido para participar do teste e as ferramentas utilizadas.
+
+| Grupo de Usuário | Quantidade | Descrição                                           |
+| ---------------- | ---------- | --------------------------------------------------- |
+| Clientes         | 3 usuários | Testaram o cadastro, login, agendamento e avaliação |
+| Barbeiros        | 2 usuários | Testaram login e cadastro de horários disponíveis   |
+| Testadores QA    | 1 membro   | Avaliou comportamento geral e cobertura dos testes  |
+
+
+| Ferramenta         | Finalidade                               |
+| ------------------ | ---------------------------------------- |
+| Postman            | Testes de API (GET, POST, PUT, DELETE)   |
+| Insomnia           | Alternativa para testes REST             |
+| Swagger UI         | Testes rápidos durante o desenvolvimento |
+| SQL Server/SQLite  | Verificação de dados persistidos         |
+| Visual Studio Code | Desenvolvimento e depuração              |
+| Entity Framework   | Execução de Migrations e validação ORM   |
+| GitHub             | Controle de versão e colaboração         |
+| XUnit              | framework de teste Unitário              |
+
 
 # Descrição de Teste Unitário
  Objetivo:
  Verificar se os métodos estão funcionando corretamente.<br>
  Cada diretorio tem seu metodo de teste unitario , testando os metodos ```GET,POST,PUT,DELETE.```
 
-## diretorios dos teste unitarios  em BarberConnect.Api.Test
+## diretorios dos testes unitários em BarberConnect.Api.Test
 ```
  ServicoTest
 ```
@@ -97,5 +117,5 @@ dotnet test --filter "AgendamentoTest"
 
 
 
-todos os testes juntos realizados total 70 passarom com sucesso.
+### Todos os testes juntos realizados totalizaram 70, passaram com sucesso.
 <img src="img/TodosOsTest.png" >
