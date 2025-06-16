@@ -5,4 +5,4 @@
 
 Visão geral da interação do usuário com as funcionalidades que fazem parte do sistema sociotécnico (protótipo de telas).
 
-![Tela 1](https://imgur.com/a/HfRLGbn)
+![Tela 1](https://imgur.com/a/HfRLGbn.png)
