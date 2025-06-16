@@ -6,6 +6,4 @@
 Visão geral da interação do usuário com as funcionalidades que fazem parte do sistema sociotécnico (protótipo de telas).
 
 
-<img src="https://imgur.com/a/XQBOzFn">
-
-
+![tela 1](https://github.com/user-attachments/assets/fe214080-2649-48e2-819a-f10075c1fba9)
