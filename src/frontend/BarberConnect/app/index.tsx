@@ -15,7 +15,7 @@ export default function HomeScreen() {
       </Link>
 
       {/* Botão Entrar com react-native-paper */}
-      <Link href="/BotaoNavegacao" asChild>
+      <Link href="/Login" asChild>
         <Button icon="account-circle" mode="contained" style={styles.paperButton}>
           Entrar
         </Button>
