@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { BottomNavigation, Provider as PaperProvider, Text } from 'react-native-paper';
-import { View, StyleSheet } from 'react-native';
+import { BottomNavigation, Provider as PaperProvider, Text, Card, Avatar, Button } from 'react-native-paper';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const InicioRoute = () => (
@@ -9,10 +9,62 @@ const InicioRoute = () => (
   </View>
 );
 
+const LeftContent = props => <Avatar.Icon {...props} icon="scissors-cutting" />;
+
 const ServicosRoute = () => (
-  <View style={styles.content}>
-    <Text>Serviços</Text>
-  </View>
+  <ScrollView contentContainerStyle={styles.cardContainer}>
+    {/* Card 1 */}
+    <Card style={styles.card}>
+      <Card.Title title="Corte Masculino" subtitle="R$ 30,00" left={LeftContent} />
+      <Card.Content>
+        <Text variant="bodyMedium">Corte moderno com finalização.</Text>
+      </Card.Content>
+      <Card.Cover source={{ uri: 'https://picsum.photos/300?1' }} />
+      <Card.Actions>
+        <Button>Agendar</Button>
+        <Button>Detalhes</Button>
+      </Card.Actions>
+    </Card>
+
+    {/* Card 2 */}
+    <Card style={styles.card}>
+      <Card.Title title="Barba Completa" subtitle="R$ 25,00" left={LeftContent} />
+      <Card.Content>
+        <Text variant="bodyMedium">Modelagem, hidratação e toalha quente.</Text>
+      </Card.Content>
+      <Card.Cover source={{ uri: 'https://picsum.photos/300?2' }} />
+      <Card.Actions>
+        <Button>Agendar</Button>
+        <Button>Detalhes</Button>
+      </Card.Actions>
+    </Card>
+
+    {/* Card 3 */}
+    <Card style={styles.card}>
+      <Card.Title title="Sobrancelha" subtitle="R$ 15,00" left={LeftContent} />
+      <Card.Content>
+        <Text variant="bodyMedium">Design com navalha para realce do olhar.</Text>
+      </Card.Content>
+      <Card.Cover source={{ uri: 'https://picsum.photos/300?3' }} />
+      <Card.Actions>
+        <Button>Agendar</Button>
+        <Button>Detalhes</Button>
+      </Card.Actions>
+    </Card>
+
+    {/* Card 4 */}
+    <Card style={styles.card}>
+      <Card.Title title="Corte Infantil" subtitle="R$ 20,00" left={LeftContent} />
+      <Card.Content>
+        <Text variant="bodyMedium">Corte estiloso para os pequenos.</Text>
+      </Card.Content>
+      <Card.Cover source={{ uri: 'https://picsum.photos/300?4' }} />
+      <Card.Actions>
+        <Button>Agendar</Button>
+        <Button>Detalhes</Button>
+      </Card.Actions>
+    </Card>
+  </ScrollView>
 );
 
 const NotificationsRoute = () => (
@@ -83,5 +135,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  cardContainer: {
+    padding: 16,
+    alignItems: 'center',
+  },
+  card: {
+    width: '100%',
+    maxWidth: 400,
+    marginBottom: 16,
   },
 });
