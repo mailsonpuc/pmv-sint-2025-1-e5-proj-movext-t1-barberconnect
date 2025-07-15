@@ -1,17 +1,25 @@
-
 import { Link } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-paper';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>BarberConnect</Text>
-     
-      
-      <Link href="/Cadastrar"><Button icon="account-circle">Cadastrar</Button></Link>
-      <Link href="/BotaoNavegacao"><Button icon="account-circle">Entrar</Button></Link>
+      <Text style={styles.title}>BarberConnect</Text>
 
+      {/* Botão Cadastrar com Link e estilização */}
+      <Link href="/Cadastrar" asChild>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Cadastrar</Text>
+        </TouchableOpacity>
+      </Link>
+
+      {/* Botão Entrar com react-native-paper */}
+      <Link href="/BotaoNavegacao" asChild>
+        <Button icon="account-circle" mode="contained" style={styles.paperButton}>
+          Entrar
+        </Button>
+      </Link>
     </View>
   );
 }
@@ -21,5 +29,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 40,
+  },
+  button: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  paperButton: {
+    width: 160,
+    borderRadius: 8,
   },
 });
