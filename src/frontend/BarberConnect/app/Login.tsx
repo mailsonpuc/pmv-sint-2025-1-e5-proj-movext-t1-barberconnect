@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { router } from 'expo-router';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // <- Importa AsyncStorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const [nome, setNome] = React.useState('');
@@ -18,7 +18,7 @@ const Login = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            userName: nome, // <- deve ser "userName" com N maiúsculo
+            userName: nome, // <- importante: "userName" com N maiúsculo
             password: senha,
           }),
         }
@@ -27,14 +27,17 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
 
-        // Armazena os tokens no AsyncStorage
+        // Armazena os tokens
         await AsyncStorage.setItem('accessToken', data.token);
         await AsyncStorage.setItem('refreshToken', data.refreshToken);
+
+        // Armazena o nome do usuário
+        await AsyncStorage.setItem('username', nome); // <- ESSENCIAL
 
         Alert.alert('Sucesso', 'Usuário logado com sucesso!', [
           {
             text: 'OK',
-            onPress: () => router.replace('/BotaoNavegacao'),
+            onPress: () => router.replace('/BotaoNavegacao'), // redireciona
           },
         ]);
       } else {
@@ -75,7 +78,8 @@ const Login = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Alinha ao topo
+    flex: 1,
   },
   input: {
     marginBottom: 16,
